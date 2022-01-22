@@ -29,13 +29,18 @@
 
     .recent-menu-item {
         box-sizing: content-box;
-        padding-left: 16px;
+        position: relative;
+        padding-right: 16px;
         width: 80px;
         text-align: center;
 
         &.is-ordered {
-            padding-right: 16px;
+            padding-left: 16px;
             border-right: 1px solid $booking-color-bg102;
+
+            & + .recent-menu-item {
+                padding-left: 16px;
+            }
         }
 
         &:last-child {
@@ -54,8 +59,6 @@
 
     .badge-popular {
         position: absolute;
-        top: 0;
-        left: 0;
         padding: 0 5px;
         border-radius: 10px;
         line-height: 16px;
@@ -73,8 +76,8 @@
 
     .badge-cart {
         position: absolute;
-        bottom: 0;
-        right: 0;
+        top: 50px;
+        right: 18px;
         display: flex;
         padding: 6px;
         border: 1px solid $booking-color-border150;
