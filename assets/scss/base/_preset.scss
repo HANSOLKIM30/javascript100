@@ -18,3 +18,9 @@
         display: none;  // Chrome 스크롤바 감추기
     }
 }
+
+body.scroll-off {
+    overflow: hidden;
+    -ms-touch-action: none;
+    touch-action: none;
+}

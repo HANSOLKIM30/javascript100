@@ -14,3 +14,9 @@
     -webkit-line-clamp: $lines;
     -webkit-box-orient: vertical; /* autoprefixer: off */
 }
+
+@mixin common-inner {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 720px;
+}
