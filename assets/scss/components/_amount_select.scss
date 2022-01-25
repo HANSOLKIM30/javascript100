@@ -18,7 +18,8 @@
             background-color: #00d780; 
             color: #fff;
         }
-        &.disabled {
+        &.disabled,
+        &:disabled {
             // 현재 color의 속성에 따라 before, after 요소의 color도 바뀜
             color: $booking-color-border102;
         }

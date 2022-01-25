@@ -89,8 +89,8 @@ textarea {
     border: 0;
     &::placeholder {
         /* Chrome, Safari, Firefox */
-        color: #444;
-        opacity: 1;
+        color: #c9c9c9;
+        opacity: 1; // Firefox 때문
     }
     &:-ms-input-placeholder {
         /* IE, Edge */
