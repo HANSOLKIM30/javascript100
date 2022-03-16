@@ -1,0 +1,31 @@
+{
+  "name": "naver_order_page",
+  "version": "1.0.0",
+  "description": "* 네이버 주문하기 페이지 구현을 통한 html5 및 sass학습",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "lit": "^2.2.0"
+  },
+  "scripts": {
+    "db": "json-server --watch .db/json --port 1234",
+    "serve": "yarn polymer serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HANSOLKIM30/naver_order_page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HANSOLKIM30/naver_order_page/issues"
+  },
+  "homepage": "https://github.com/HANSOLKIM30/naver_order_page#readme",
+  "devDependencies": {
+    "json-server": "^0.17.0",
+    "polymer-cli": "^1.9.11"
+  }
+}
