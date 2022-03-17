@@ -57,6 +57,19 @@ export default class MenuPage extends View {
 
     onChangeCategory(category) {
         this.selectedCategory = category;
+
+        // y 값 계산하기
+        const y = document
+            .querySelector(`[data-scroll-id=${category}]`)
+            .getBoundingClientRect().top;
+
+        // scroll 가능한 API
+        window.scrollBy({
+            top: y - 140,
+            left: 0,
+            // scrollBy API의 핵심
+            behavior: 'smooth',
+        })
     }
 
     redirectDetailPage(id) {
@@ -90,7 +103,7 @@ export default class MenuPage extends View {
                     <div class="tab-switch-box" role="tablist">
                         ${TABS.map(
                             (tab, index) => 
-                            html`
+                            html `
                             <a href="#" class="tab-switch ${index === this.tabIndex ? 'is-active' : ''}" role="tab" @click = ${() => this.onChangeTab(index)}>
                                 ${tab.text}
                                 <img src="${tab.imageUrl}" alt="${tab.text}" class="ico-check" aria-hidden="${index !== this.tabIndex}">
@@ -124,7 +137,7 @@ export default class MenuPage extends View {
                             <ul class="recent-menu-list">
                                 <!-- 객체구조 분해 할당(함수 매개변수로 전달된 개체에서 필드 해체하기) -->
                                 ${this.recentMenuItems.map(({id, name, price, isPopular, imageUrl}) => 
-                                    html`
+                                    html `
                                     <li class="recent-menu-item is-ordered" @click = ${() => this.redirectDetailPage(id)}>
                                         <a href="./detail.html">
                                             <div class="menu-img-area">
@@ -151,7 +164,7 @@ export default class MenuPage extends View {
                         <div class="common-inner">
                             <ul class="category-list scroll-x">
                                 ${categories.map(({ category, categoryName }) => 
-                                    html`
+                                    html `
                                     <li class="category-item">
                                         <a class="category-tab ${category === this.selectedCategory ? 'is-active' : ''}" @click=${() => this.onChangeCategory(category)}>${categoryName}</a>
                                     </li>
@@ -163,85 +176,10 @@ export default class MenuPage extends View {
                     <!-- // 메뉴 카테고리 영역 -->
 
                     <!-- 메뉴 리스트 영역 -->
-                    <div class="menu-list-area new">
-                        <div class="common-inner">
-                            <div class="menu-category">
-                                <p class="title">새로 나온 메뉴</p>
-                            </div>
-                            <ul class="menu-list">
-                                <li class="menu-item">
-                                    <a href="./detail.html" class="menu-detail">
-                                        <div class="menu-img-area">
-                                            <!-- 이미지 최적화를 위해 가로, 세로를 html 내부에 적어주는 것이 좋다. -->
-                                            <img src="https://via.placeholder.com/100x110/ffffff/0000000" alt="(메뉴명)" class="menu-img" width="100" height="110">
-                                        </div>
-                                        <div class="menu-info-area">
-                                            <p class="menu-name-group">
-                                                <span class="menu-name">메뉴 이름</span>
-                                                <img src="../assets/images/ico-new.svg" alt="new" class="ico-new">
-                                            </p>
-                                            <div class="menu-info-group">
-                                                <span class="menu-grade"><img src="../assets/images/ico-star.svg" alt="별점" class="ico-star">5.00</span>
-                                                <span class="menu-number-of-order">주문수<em>999</em></span>
-                                            </div>
-                                            <p class="menu-desc">메뉴에 대한 간단한 설명이 적혀있습니다. 메뉴에 대한 간단한 설명이 적혀있습니다. 메뉴에 대한 간단한 설명이 적혀있습니다.</p>
-                                            <p class="menu-price">9,990원</p>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="btn-cart">
-                                        <img src="../assets/images/ico-cart-fill-green.svg" alt="주문하기">
-                                        <span class="num">1</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="./detail.html" class="menu-detail">
-                                        <div class="menu-img-area">
-                                            <img src="https://via.placeholder.com/100x110/ffffff/0000000" alt="(메뉴명)" class="menu-img" width="100" height="110">
-                                        </div>
-                                        <div class="menu-info-area">
-                                            <p class="menu-name-group">
-                                                <span class="menu-name">메뉴 이름</span>
-                                                <img src="../assets/images/ico-new.svg" alt="new" class="ico-new">
-                                            </p>
-                                            <div class="menu-info-group">
-                                                <span class="menu-grade"><img src="../assets/images/ico-star.svg" alt="별점" class="ico-star">5.00</span>
-                                                <span class="menu-number-of-order">주문수<em>999</em></span>
-                                            </div>
-                                            <p class="menu-desc">메뉴에 대한 간단한 설명이 적혀있습니다. 메뉴에 대한 간단한 설명이 적혀있습니다. 메뉴에 대한 간단한 설명이 적혀있습니다.</p>
-                                            <p class="menu-price">9,990원</p>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="btn-cart disabled">
-                                        품절
-                                    </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="./detail.html" class="menu-detail">
-                                        <div class="menu-img-area">
-                                            <img src="https://via.placeholder.com/100x110/ffffff/0000000" alt="(메뉴명)" class="menu-img" width="100" height="110">
-                                        </div>
-                                        <div class="menu-info-area">
-                                            <p class="menu-name-group">
-                                                <span class="menu-name">메뉴 이름</span>
-                                                <img src="../assets/images/ico-new.svg" alt="new" class="ico-new">
-                                            </p>
-                                            <div class="menu-info-group">
-                                                <span class="menu-grade"><img src="../assets/images/ico-star.svg" alt="별점" class="ico-star">5.00</span>
-                                                <span class="menu-number-of-order">주문수<em>999</em></span>
-                                            </div>
-                                            <p class="menu-desc">메뉴에 대한 간단한 설명이 적혀있습니다. 메뉴에 대한 간단한 설명이 적혀있습니다. 메뉴에 대한 간단한 설명이 적혀있습니다.</p>
-                                            <p class="menu-price">9,990원</p>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="btn-cart">
-                                        <img src="../assets/images/ico-cart.svg" alt="주문하기">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    ${this.menuGroups.map((menuGroup) => 
+                        html `<menu-list .menuGroup=${menuGroup}></menu-list>`
+                    )}
                     <!-- // 메뉴 리스트 영역 -->
-
                 </div>
             </div>
         </div>`;
