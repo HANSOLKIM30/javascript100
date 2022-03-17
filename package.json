@@ -10,7 +10,7 @@
     "lit": "^2.2.1"
   },
   "scripts": {
-    "db": "json-server --watch ./db.json --port 1234",
+    "db": "json-server --watch ./db.json",
     "serve": "yarn polymer serve"
   },
   "repository": {
