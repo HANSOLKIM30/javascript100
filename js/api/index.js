@@ -14,4 +14,12 @@ async function fetchGetMenuGroup() {
     return data;
 }
 
-export { fetchGetRecentOrders, fetchGetMenuGroup }
+async function fetchGetMenu(menuId) {
+    const response = await fetch(`http://localhost:3000/menu/${menuId}`);
+
+    const data = await response.json();
+
+    return data;
+}
+
+export { fetchGetRecentOrders, fetchGetMenuGroup, fetchGetMenu }

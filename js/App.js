@@ -11,11 +11,11 @@ export default class App extends View {
         super();
 
         this.currentPage = 'menu';
+        this.orderTypeIndex = 0;    // 전 페이지에 걸쳐 쓰일 수 있으므로 App class에 선언
 
         // onPopState: 같은 document에 관한 두개의 히스토리 엔트리에 변화가 일어날 때마다, popstate event가 window 객체에 붙게 된다.
         window.onpopstate = () => {
             const [, page] = location.pathname.split('/');  // url의 두번째 인자를 뽑아오기
-            console.log(page);
             this.currentPage = page;
         } 
     }
@@ -25,21 +25,18 @@ export default class App extends View {
     static get properties() {
         return {
             currentPage: { type: String },
+            orderTypeIndex : { type: Number },
         }
-    }
-
-    // Root를 렌더함.
-    createRenderRoot() {
-        return this;
     }
 
     // ***라우팅 구현***
     route() {
         switch (this.currentPage) {
             case 'detail' :
+                console.log(this.orderTypeIndex);
                 return html`
-                <detail-page></detail-page>
-                `
+                <detail-page .orderTypeIndex ${this.orderTypeIndex}></detail-page>
+                `;
             default:
                 return html ` 
                 <menu-page></menu-page>
