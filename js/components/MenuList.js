@@ -2,21 +2,19 @@ import { html } from 'lit';
 import View from '../view.js';
 
 export default class MenuList extends View {
-    constructor(menuGroup) {
+    constructor(menuGroup, redirectDetailPage) {
         super();
 
         this.menuGroup = menuGroup;
         this.isClosed = false;
+        this.redirectDetailPage = redirectDetailPage;
     }
 
     static get properties() {
         return {
-            menuGroup: {
-                type: Object,
-            },
-            isClosed: {
-                type: Boolean,
-            },
+            menuGroup: { type: Object },
+            isClosed: { type: Boolean },
+            redirectDetailPage: { type: Function },
         };
     }
 
@@ -40,8 +38,8 @@ export default class MenuList extends View {
                     <ul class="menu-list">
                         ${this.menuGroup.items.map((item) => (
                             html `
-                                <li class="menu-item">
-                                    <a href="./detail.html" class="menu-detail">
+                                <li class="menu-item" @click=${() => this.redirectDetailPage(item.id)}>
+                                    <a class="menu-detail">
                                         <div class="menu-img-area">
                                             <!-- 이미지 최적화를 위해 가로, 세로를 html 내부에 적어주는 것이 좋다. -->
                                             <img src="${item.imageUrl}" alt="${item.name}" class="menu-img" width="100" height="110">

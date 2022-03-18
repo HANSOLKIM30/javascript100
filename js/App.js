@@ -9,12 +9,22 @@ export default class App extends View {
     // 생성자를 통해 부모를 호출
     constructor() {
         super();
+
+        this.currentPage = 'menu';
+
+        // onPopState: 같은 document에 관한 두개의 히스토리 엔트리에 변화가 일어날 때마다, popstate event가 window 객체에 붙게 된다.
+        window.onpopstate = () => {
+            const [, page] = location.pathname.split('/');  // url의 두번째 인자를 뽑아오기
+            console.log(page);
+            this.currentPage = page;
+        } 
     }
 
     // 일종의 상태 만들기(전역변수, reduces를 흉내내는 observer, proxy와 같은 것.)
     // static get properties 이용하기
     static get properties() {
         return {
+            currentPage: { type: String },
         }
     }
 
@@ -23,14 +33,22 @@ export default class App extends View {
         return this;
     }
 
+    // ***라우팅 구현***
+    route() {
+        switch (this.currentPage) {
+            case 'detail' :
+                return html`
+                <detail-page></detail-page>
+                `
+            default:
+                return html ` 
+                <menu-page></menu-page>
+                `;
+        }
+    }
+
     // 패키지에서 가져온 html을 이용
     render() {
-        // @ + event type ==> 이벤트 등록 가능
-        return html`
-        <div className="container">
-            <!-- Header.js에서 정의한 Web Component를 재활용 -->
-            <!-- <order-header></order-header> -->
-            <menu-page></menu-page>
-        </div>`;
+        return this.route();
     }
 }
