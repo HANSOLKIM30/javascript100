@@ -33,9 +33,8 @@ export default class App extends View {
     route() {
         switch (this.currentPage) {
             case 'detail' :
-                console.log(this.orderTypeIndex);
                 return html`
-                <detail-page .orderTypeIndex ${this.orderTypeIndex}></detail-page>
+                <detail-page .orderTypeIndex=${this.orderTypeIndex}></detail-page>
                 `;
             default:
                 return html ` 

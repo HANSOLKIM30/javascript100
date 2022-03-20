@@ -4,12 +4,12 @@ import View from '../view.js';
 export default class MenuList extends View {
     constructor(menuGroup, redirectDetailPage) {
         super();
-
+        
         this.menuGroup = menuGroup;
         this.isClosed = false;
         this.redirectDetailPage = redirectDetailPage;
     }
-
+    
     static get properties() {
         return {
             menuGroup: { type: Object },
