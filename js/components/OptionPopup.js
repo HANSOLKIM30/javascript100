@@ -2,6 +2,8 @@ import { html } from "lit";
 import View from "../view";
 import { SpinButton } from "./SpinButton";
 
+import { fetchGetMenuOptions } from "../api"
+import { getMoneyString } from "../utils/currency";
 
 const DEFAULT_OPTION = {
     id: 1,
@@ -28,6 +30,10 @@ export default class OptionPopup extends View {
         this.closeOrderPopup = closeOrderPopup;
         this.onIncreaseAmount = onIncreaseAmount;
         this.onDecreaseAmount = onDecreaseAmount;
+
+        const [menuId] = location.pathname.split('/').splice(-1);
+
+        fetchGetMenuOptions(menuId).then(response => this.option = response);
     }
 
     static get properties() {
@@ -40,6 +46,33 @@ export default class OptionPopup extends View {
             onIncreaseAmount: { type: Function },
             onDecreaseAmount: { type: Function },
         }
+    }
+
+    increaseOptionAmount(optionName) {
+        // 전개연산자 ...를 통한 깊은 복사(원본 option과 그 하위 속성의 값을 바꾸지 않게 하기 위함.)
+        const newOption = { ...this.option };
+
+        // find() 메서드는 주어진 판별 함수를 만족하는 첫 번째 요소의 값을 반환한다.
+        // option을 깊은 복사한 newOption 객체의 toppingAmountSelectOption 속성에서 ()안의 판별함수를 만족하는 요소가 있는지 검사하고, 있을 경우 해당 값을 targetOption에 할당한다.
+        const targetOption = newOption.toppingAmountSelectOptions.find((element) => element.name === optionName);
+
+        // newOption의 toppingAmountSelectOption의 요소 중 조건을 만족하는 targetOption의 amount를 1 증가
+        targetOption.amount += 1;
+
+        this.option = newOption;
+    }
+
+    decreaseOptionAmount(optionName) {
+        const newOption = { ...this.option };
+        const targetOption = newOption.toppingAmountSelectOptions.find((element) =>  element.name === optionName);
+        
+        if(targetOption.amount <= 0) {
+            return;
+        }
+
+        targetOption.amount -= 1;
+
+        this.option = newOption;
     }
 
     render() {
@@ -78,11 +111,20 @@ export default class OptionPopup extends View {
                     </div>
 
                     <div class="content-body">
-                        <topping-base-option-groups ></topping-base-option-groups>
-                        <topping-select-option-groups></topping-select-option-groups>
-                        <topping-amount-option-groups></topping-amount-option-groups>
+                        <topping-base-option-groups 
+                            .baseOptions=${this.option.baseOptions}
+                        >
+                        </topping-base-option-groups>
+                        <topping-select-option-groups .toppingSelectOptions=${this.option.toppingSelectOptions}></topping-select-option-groups>
+                        <!-- 부분적용함수 bind를 통해 추후 인자를 넘기고 실행 -->
+                        <topping-amount-option-groups 
+                            .items=${this.option.toppingAmountSelectOptions}
+                            .onIncreaseOptionAmount=${this.increaseOptionAmount.bind(this)}
+                            .onDecreaseOptionAmount=${this.decreaseOptionAmount.bind(this)}
+                        >
+                        </topping-amount-option-groups>
                     <div class="content-bottom">
-                        <button class="btn-order">1개 담기 9,999</button>
+                        <button class="btn-order">${this.menuAmount}개 담기 ${getMoneyString(this.menu.price * this.menuAmount)}</button>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { getMoneyString } from '../utils/currency.js';
 import View from '../view.js';
 
 export default class MenuList extends View {
@@ -55,7 +56,7 @@ export default class MenuList extends View {
                                                 <span class="menu-number-of-order">주문수<em>${item.orderCount}</em></span>
                                             </div>
                                             <p class="menu-desc">${item.description}</p>
-                                            <p class="menu-price">${item.price}원</p>
+                                            <p class="menu-price">${getMoneyString(item.price)}원</p>
                                         </div>
                                     </a>
                                     ${item.soldOut ? 

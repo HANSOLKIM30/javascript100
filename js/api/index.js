@@ -30,4 +30,4 @@ async function fetchGetMenuOptions(menuId) {
     return data;
 }
 
-export { fetchGetRecentOrders, fetchGetMenuGroup, fetchGetMenu }
+export { fetchGetRecentOrders, fetchGetMenuGroup, fetchGetMenu, fetchGetMenuOptions }

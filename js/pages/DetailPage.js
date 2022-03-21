@@ -3,6 +3,7 @@ import View from "../view";
 import { fetchGetMenu } from "../api";
 
 import { SpinButton } from "../components/SpinButton";
+import { getMoneyString } from "../utils/currency";
 
 // REST Api 결과가 없을 것을 대비하여 기본 객체를 상수화.(적극적으로 활용해보기)
 const DEFAULT_MENU = {
@@ -82,7 +83,7 @@ export default class DeatilPage extends View {
                     </p>
 
                     <div class="menu-info-group">
-                        <span class="menu-price">${this.menu.price}</span>
+                        <span class="menu-price">${getMoneyString(this.menu.price)}</span>
                         <span class="menu-grade"><img src="../assets/images/ico-star.svg" alt="별점"
                                 class="ico-star">${this.menu.reviewPoint}</span>
                         <span class="menu-number-of-order">주문수<em>${this.menu.orderCount}</em></span>
@@ -115,14 +116,17 @@ export default class DeatilPage extends View {
                                 </a>
                             </div>
                         </div>
-                        ${SpinButton({
-                            count: this.menuAmount,
-                            onIncrease: this.onIncreaseAmount,
-                            onDecrease: this.onDecreaseAmount, 
-                        })}
+                        <div div class="type-amount">
+                            <div class="title">수량</div>
+                            ${SpinButton({
+                                count: this.menuAmount,
+                                onIncrease: this.onIncreaseAmount,
+                                onDecrease: this.onDecreaseAmount, 
+                            })}
+                        </div>
                         <button class="btn-order" @click=${this.openOrderPopup}>
                             ${this.menuAmount}개 담기 
-                            ${this.menuAmount * this.menu.price}원
+                            ${getMoneyString(this.menuAmount * this.menu.price)}원
                         </button>
                         <!-- <button class="btn-order" disabled>지금 주문 가능한 시간이 아닙니다.</button> -->
                     </div>
@@ -231,8 +235,11 @@ export default class DeatilPage extends View {
         <!-- 옵션 팝업 영역 -->
         <option-popup 
             .menu=${this.menu} 
+            .menuAmount=${this.menuAmount}
             .isPopupOpen=${this.isPopupOpen} 
-
+            .closeOrderPopup=${this.closeOrderPopup}
+            .onIncreaseAmount=${this.onIncreaseAmount}
+            .onDecreaseAmount=${this.onDecreaseAmount}
         >
         </option-popup>
         <!-- // 옵션 팝업 영역 -->

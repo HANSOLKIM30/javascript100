@@ -1,4 +1,5 @@
 import { html } from "lit";
+import { getMoneyString } from "../utils/currency";
 import View from "../view";
 
 export default class RecentMenuList extends View {
@@ -36,7 +37,7 @@ export default class RecentMenuList extends View {
                                     <img class="menu-img" src="${imageUrl}" alt="메뉴사진">
                                 </div>
                                 <p class="menu-name">${name}</p>
-                                <p class="menu-price">${price}</p>
+                                <p class="menu-price">${getMoneyString(price)}</p>
                             </a>
                             <a href="#" class="badge-cart">
                                 <img src="../assets/images/ico-cart.svg" alt="주문하기" class="ico-cart">
