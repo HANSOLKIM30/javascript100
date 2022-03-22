@@ -48,6 +48,26 @@ export default class OptionPopup extends View {
         }
     }
 
+    toggleBaseOption(optionName) {
+        const newOption = { ...this.option };
+        const targetOption = newOption.baseOptions.find((element) => element.name === optionName);
+
+        targetOption.isSelelcted = !targetOption.isSelelcted;
+
+        this.option = newOption;
+    }
+
+    toggleToppingSelectOption(optionName) {
+        const newOption = { ...this.option };
+
+        const targetOption = newOption.toppingSelectOptions.find((element) => element.name === optionName);
+
+        // 현재 targetOption의 isSelected의 반대되는 값을 할당
+        targetOption.isSelelcted = !targetOption.isSelelcted;
+
+        this.option = newOption;
+    }
+
     increaseOptionAmount(optionName) {
         // 전개연산자 ...를 통한 깊은 복사(원본 option과 그 하위 속성의 값을 바꾸지 않게 하기 위함.)
         const newOption = { ...this.option };
@@ -112,10 +132,15 @@ export default class OptionPopup extends View {
 
                     <div class="content-body">
                         <topping-base-option-groups 
-                            .baseOptions=${this.option.baseOptions}
+                            .items=${this.option.baseOptions}
+                            .toggleBaseOption=${this.toggleBaseOption.bind(this)}
                         >
                         </topping-base-option-groups>
-                        <topping-select-option-groups .toppingSelectOptions=${this.option.toppingSelectOptions}></topping-select-option-groups>
+                        <topping-select-option-groups 
+                            .items=${this.option.toppingSelectOptions}
+                            .toggleToppingSelectOption=${this.toggleToppingSelectOption.bind(this)}
+                        >
+                        </topping-select-option-groups>
                         <!-- 부분적용함수 bind를 통해 추후 인자를 넘기고 실행 -->
                         <topping-amount-option-groups 
                             .items=${this.option.toppingAmountSelectOptions}
