@@ -67,10 +67,11 @@ export default class MenuPage extends View {
         }));
 
         return html `
-        <div className="container">
+        <div class="container">
             <!-- Header -->
             <order-header></order-header>
             <!-- // Header -->
+            
             <!-- 주문정보영역 -->
             <div class="order-info-area">
                 <div class="common-inner">
