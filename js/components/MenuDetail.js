@@ -5,7 +5,7 @@ import { SpinButton } from "../components/SpinButton";
 import { getMoneyString } from "../utils/currency";
 
 export default class MenuDetail extends View {
-    constructor(menu, orderTypeIndex, menuAmount, onIncreaseAmount, onDecreaseAmount, isOrderPopup, openOrderPopup) {
+    constructor(menu, orderTypeIndex, menuAmount, onIncreaseAmount, onDecreaseAmount, openOrderPopup) {
         super();
 
         this.menu = menu;
@@ -13,7 +13,6 @@ export default class MenuDetail extends View {
         this.menuAmount = menuAmount;
         this.onIncreaseAmount = onIncreaseAmount;
         this.onDecreasAmout = onDecreaseAmount;
-        this.isPopupOpen = isOrderPopup;
         this.openOrderPopup = openOrderPopup;
     }
 
@@ -24,8 +23,7 @@ export default class MenuDetail extends View {
             menuAmount: { type : Number },
             onIncreaseAmount: { type : Function },
             meonDecreaseAmountnu: { type : Function },
-            isPopupOpen: { type: Boolean },
-            openOrderPopup: { type: Function }
+            openOrderPopup: { type: Function },
         }
     }
 

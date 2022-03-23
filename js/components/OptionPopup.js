@@ -16,7 +16,7 @@ export default class OptionPopup extends View {
     constructor(
         menu,
         menuAmount, 
-        isPopupOpen, 
+        isPopupOpen = false, 
         closeOrderPopup, 
         onIncreaseAmount, 
         onDecreaseAmount
@@ -40,7 +40,6 @@ export default class OptionPopup extends View {
         return {
             menu: { type: Object },
             menuAmount: { type: Number },
-            isPopupOpen: { type: Boolean },
             option: { type: Object },
             closeOrderPopup: { type: Function },
             onIncreaseAmount: { type: Function },
@@ -95,6 +94,24 @@ export default class OptionPopup extends View {
         this.option = newOption;
     }
 
+    getFinalPrice() {
+        let price = this.menu.price;
+
+        this.option.toppingSelectOptions.forEach((option => {
+            if(option.isSelelcted) {
+                price += option.price;
+            }
+        }));
+
+        this.option.toppingAmountSelectOptions.forEach((option => {
+            if(option.amount !== 0) {
+                price += option.price * option.amount;
+            } 
+        }));
+
+        return price * this.menuAmount;
+    }
+
     render() {
         return html`
             <div class="option-popup-area ${this.isPopupOpen ? '' : 'hidden'}">
@@ -141,7 +158,7 @@ export default class OptionPopup extends View {
                             .toggleToppingSelectOption=${this.toggleToppingSelectOption.bind(this)}
                         >
                         </topping-select-option-groups>
-                        <!-- 부분적용함수 bind를 통해 추후 인자를 넘기고 실행 -->
+                        <!-- 부분적용함수 bind를 통해 this를 해당 class로 지정하여 해당 메서드 내부의 this가 해당 class를 바라볼 수 있도록 지정하고, 추후 인자를 넘기고 실행 -->
                         <topping-amount-option-groups 
                             .items=${this.option.toppingAmountSelectOptions}
                             .onIncreaseOptionAmount=${this.increaseOptionAmount.bind(this)}
@@ -149,7 +166,7 @@ export default class OptionPopup extends View {
                         >
                         </topping-amount-option-groups>
                     <div class="content-bottom">
-                        <button class="btn-order">${this.menuAmount}개 담기 ${getMoneyString(this.menu.price * this.menuAmount)}</button>
+                        <button class="btn-order">${this.menuAmount}개 담기 ${getMoneyString(this.getFinalPrice())}</button>
                     </div>
                 </div>
             </div>

@@ -1,15 +1,18 @@
 import { html } from "lit";
 
 import { fetchGetRecentOrders, fetchGetMenuGroup } from "../api/index.js";
+import { ORDER_TYPE_MESSAGE } from "../constants/constants.js";
+import { getMoneyString } from "../utils/currency.js";
 import View from '../view.js';
 
 export default class MenuPage extends View {
-    constructor() {
+    constructor(orderTypeIndex, onSetOrderTypeIndex, cartItem=[]) {
         super();
 
-        this.cartItems = [];
+        this.orderTypeIndex = orderTypeIndex;
+        this.onSetOrderTypeIndex = onSetOrderTypeIndex;
+        this.cartItems = cartItem;
         
-        this.tabIndex = 0;
         this.recentMenuItems = [];
         this.menuGroups = [];
         this.selectedCategory = 'recommends';
@@ -25,16 +28,19 @@ export default class MenuPage extends View {
 
     static get properties() {
         return {
-            tabIndex: { type: Number },
-            selectedCategory: { type: String },
+            orderTypeIndex: { type: Number },
+            onSetOrderTypeIndex: { type: Function },
+            cartItems: { type: Array },
+
             recentMenuItems: { type: Array },
             menuGroups: { type: Array },
-            cartItems: { type: Array },
+            selectedCategory: { type: String },
         };
     }
 
-    onChangeTab(index) {
-        this.tabIndex = index;
+    // 해당 페이지에서만 적용되어야하는 orderTypeIndex가 있기 때문에 별도로 메서드 선언   
+    setOrderTypeIndex(orderTypeIndex) {
+        this.orderTypeIndex = orderTypeIndex;
     }
 
     onChangeCategory(category) {
@@ -60,11 +66,21 @@ export default class MenuPage extends View {
         dispatchEvent(new PopStateEvent('popstate'));
     }
 
+    redirectOrderPage() {
+        history.pushState(null, null, 'order');
+        dispatchEvent(new PopStateEvent('popstate'));
+    }
+
     render() {
         const categories = this.menuGroups.map(({ category, categoryName }) => ({
             category,
             categoryName,
         }));
+
+        // 배열의 각 요소에 대해 주어진 리듀서(reducer) 함수를 실행하고, 하나의 결과값을 반환한다.
+        const cartItemTotalPrice = this.cartItems.reduce(
+            (acc, item) => acc + item.menu.price * item.amount, 0
+        );
 
         return html `
         <div class="container">
@@ -88,9 +104,26 @@ export default class MenuPage extends View {
                         </div>
                         
                         <!-- 주문분류 -->
-                        <tab-list .onChangeTab=${this.onChangeTab} .tabIndex=${this.tabIndex}></tab-list>
-                        <!-- // 주문분류 -->
+                        <tab-list 
+                            .orderTypeIndex=${this.orderTypeIndex} 
+                            .onChangeTab=${this.setOrderTypeIndex.bind(this)}
+                        >
+                        </tab-list>
                         
+                        <div class="info-main-notice">
+                            ${ORDER_TYPE_MESSAGE[this.orderTypeIndex]}
+                        </div>
+
+                        <div class="info-main-notice alert hidden">
+                            <svg aria-hidden="true" class="ico-clock" viewBox="0 0 13 13" width="13" height="13" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill="currentColor"
+                                    d="M6.5 0a6.5 6.5 0 110 13 6.5 6.5 0 010-13zm0 1a5.5 5.5 0 100 11 5.5 5.5 0 000-11zm.492 1.137v4.157l2.792 2.674-.692.722-3.1-2.97V2.137h1z">
+                                </path>
+                            </svg>
+                            지금은 주문을 받을 수 없습니다.
+                        </div>
+                        <!-- // 주문분류 -->
                         <!-- 최근 주문 내역 -->
                         <recent-menu-list .recentMenuItems=${this.recentMenuItems} .redirectDetailPage=${this.redirectDetailPage}></recent-menu-list>
                         <!-- // 최근 주문 내역 -->
@@ -127,7 +160,7 @@ export default class MenuPage extends View {
                     <div class="common-inner">
                         <div>
                             <p class="menu-name">메뉴 이름</p>
-                            <p class="menu-price">9,999원</p>
+                            <p class="menu-price">${getMoneyString(cartItemTotalPrice)}원</p>
                         </div>
                         <a href="./order.html" class="btn-order">
                             <span class="txt">주문하기</span>

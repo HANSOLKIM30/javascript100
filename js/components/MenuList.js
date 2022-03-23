@@ -7,15 +7,15 @@ export default class MenuList extends View {
         super();
         
         this.menuGroup = menuGroup;
-        this.isClosed = false;
         this.redirectDetailPage = redirectDetailPage;
+        this.isClosed = false;
     }
     
     static get properties() {
         return {
             menuGroup: { type: Object },
-            isClosed: { type: Boolean },
             redirectDetailPage: { type: Function },
+            isClosed: { type: Boolean },
         };
     }
 
@@ -63,7 +63,7 @@ export default class MenuList extends View {
                                         html `<a href="#" class="btn-cart disabled"> 품절</a>` : 
                                         html ` 
                                             <a href="#" class="btn-cart">
-                                                <img src="../assets/images/ico-cart-fill-green.svg" alt="주문하기">
+                                                <img src="../assets/images/ico-cart.svg" alt="주문하기">
                                                 <!-- <span class="num"></span> -->
                                             </a>`
                                     }                               

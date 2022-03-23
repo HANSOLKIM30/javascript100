@@ -16,12 +16,15 @@ const DEFAULT_MENU = {
 };
 
 export default class DeatilPage extends View {
-    constructor(orderTypeIndex) {
+    constructor(orderTypeIndex, onSetOrderTypeIndex, onAddCartItem) {
         super();
+
+        this.orderTypeIndex = orderTypeIndex;
+        this.onSetOrderTypeIndex = onSetOrderTypeIndex;
+        this.onAddCartItem = onAddCartItem;
 
         this.menu = DEFAULT_MENU;
         this.menuAmount = 1;
-        this.orderTypeIndex = orderTypeIndex;
         this.isPopupOpen = false;
         
         // splice를 통해 마지막 요소 반환
@@ -32,10 +35,10 @@ export default class DeatilPage extends View {
 
     static get properties() {
         return {
-           menu: { type: Object },
-           orderTypeIndex: { type: Number },
-           menuAmount: { type: Number },
-           isPopupOpen: { type: Boolean },
+            menu: { type: Object },
+            menuAmount: { type: Number },
+            isPopupOpen: { type: Boolean },
+            orderTypeIndex: { type: Number },
         }
     }
    
@@ -70,14 +73,14 @@ export default class DeatilPage extends View {
             <!-- // 고정헤더영역 -->
 
         <!-- 제품 상세설명 영역 -->
+        <!-- 부분적용함수 bind를 통해 this를 해당 class로 지정하여 해당 메서드 내부의 this(ex. this.isPopupOpen)가 해당 class를 바라볼 수 있도록 지정 -->
         <menu-detail
             .menu=${this.menu}
             .orderTypeIndex=${this.orderTypeIndex}
             .menuAmount=${this.menuAmount}
-            .onIncreaseAmount=${this.onIncreaseAmount}
-            .onDecreaseAmount=${this.onDecreaseAmount}
-            .isPopupOpen=${this.isPopupOpen}
-            .openOrderPopup=${this.openOrderPopup}
+            .onIncreaseAmount=${this.onIncreaseAmount.bind(this)}
+            .onDecreaseAmount=${this.onDecreaseAmount.bind(this)}
+            .openOrderPopup=${this.openOrderPopup.bind(this)}
         ></menu-detail>
         <!-- 제품 상세설명 영역 -->
         
@@ -111,9 +114,9 @@ export default class DeatilPage extends View {
             .menu=${this.menu} 
             .menuAmount=${this.menuAmount}
             .isPopupOpen=${this.isPopupOpen} 
-            .closeOrderPopup=${this.closeOrderPopup}
-            .onIncreaseAmount=${this.onIncreaseAmount}
-            .onDecreaseAmount=${this.onDecreaseAmount}
+            .closeOrderPopup=${this.closeOrderPopup.bind(this)}
+            .onIncreaseAmount=${this.onIncreaseAmount.bind(this)}
+            .onDecreaseAmount=${this.onDecreaseAmount.bind(this)}
         >
         </option-popup>
         <!-- // 옵션 팝업 영역 -->
