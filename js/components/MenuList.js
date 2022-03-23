@@ -64,7 +64,7 @@ export default class MenuList extends View {
                                         html ` 
                                             <a href="#" class="btn-cart">
                                                 <img src="../assets/images/ico-cart-fill-green.svg" alt="주문하기">
-                                                <span class="num">1</span>
+                                                <!-- <span class="num"></span> -->
                                             </a>`
                                     }                               
                                 </li>`
