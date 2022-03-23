@@ -39,6 +39,8 @@ export default class DeatilPage extends View {
             menuAmount: { type: Number },
             isPopupOpen: { type: Boolean },
             orderTypeIndex: { type: Number },
+            onSetOrderTypeIndex: { type: Function },
+            onAddCartItem: { type: Function },
         }
     }
    
@@ -117,6 +119,7 @@ export default class DeatilPage extends View {
             .closeOrderPopup=${this.closeOrderPopup.bind(this)}
             .onIncreaseAmount=${this.onIncreaseAmount.bind(this)}
             .onDecreaseAmount=${this.onDecreaseAmount.bind(this)}
+            .onAddCartItem=${this.onAddCartItem}
         >
         </option-popup>
         <!-- // 옵션 팝업 영역 -->

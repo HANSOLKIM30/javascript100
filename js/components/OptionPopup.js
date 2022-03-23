@@ -19,7 +19,8 @@ export default class OptionPopup extends View {
         isPopupOpen = false, 
         closeOrderPopup, 
         onIncreaseAmount, 
-        onDecreaseAmount
+        onDecreaseAmount,
+        onAddCartItem
         ) {
         super();
 
@@ -30,6 +31,7 @@ export default class OptionPopup extends View {
         this.closeOrderPopup = closeOrderPopup;
         this.onIncreaseAmount = onIncreaseAmount;
         this.onDecreaseAmount = onDecreaseAmount;
+        this.onAddCartItem = onAddCartItem;
 
         const [menuId] = location.pathname.split('/').splice(-1);
 
@@ -44,6 +46,7 @@ export default class OptionPopup extends View {
             closeOrderPopup: { type: Function },
             onIncreaseAmount: { type: Function },
             onDecreaseAmount: { type: Function },
+            onAddCartItem: { type: Function },
         }
     }
 
@@ -166,7 +169,18 @@ export default class OptionPopup extends View {
                         >
                         </topping-amount-option-groups>
                     <div class="content-bottom">
-                        <button class="btn-order">${this.menuAmount}개 담기 ${getMoneyString(this.getFinalPrice())}</button>
+                        <button 
+                            class="btn-order" 
+                            @click=${() => this.onAddCartItem({
+                                menu: this.menu,
+                                amount: this.menuAmount,
+                                option: this.option,
+                                price: this.price
+                            }
+                            )}
+                        >
+                            ${this.menuAmount}개 담기 ${getMoneyString(this.getFinalPrice())}
+                        </button>
                     </div>
                 </div>
             </div>

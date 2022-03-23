@@ -77,8 +77,10 @@ export default class MenuPage extends View {
             categoryName,
         }));
 
+        const cartItemsMenuString = this.cartItems.map((item) => item.menu.name).join('+');
+
         // 배열의 각 요소에 대해 주어진 리듀서(reducer) 함수를 실행하고, 하나의 결과값을 반환한다.
-        const cartItemTotalPrice = this.cartItems.reduce(
+        const cartItemsTotalPrice = this.cartItems.reduce(
             (acc, item) => acc + item.menu.price * item.amount, 0
         );
 
@@ -159,14 +161,14 @@ export default class MenuPage extends View {
                 <div class="order-box-area">
                     <div class="common-inner">
                         <div>
-                            <p class="menu-name">메뉴 이름</p>
-                            <p class="menu-price">${getMoneyString(cartItemTotalPrice)}원</p>
+                            <p class="menu-name">${cartItemsMenuString}</p>
+                            <p class="menu-price">${getMoneyString(cartItemsTotalPrice)}원</p>
                         </div>
                         <a href="./order.html" class="btn-order">
                             <span class="txt">주문하기</span>
                             <span class="icon-cart">
                                 <img src="../assets/images/ico-cart-fill.svg" alt="" aria-hidden="true" class="ico-cart">
-                                <span class="num">1</span>
+                                <span class="num">${this.cartItems.length}</span>
                             </span>
                         </a>
                     </div>

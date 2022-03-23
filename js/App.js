@@ -36,9 +36,9 @@ export default class App extends View {
         this.orderTypeIndex = orderTypeIndex;
     }
 
-    // 장바구니 정보를 모든 페이지가 공유
+    // 장바구니 정보: 모든 페이지가 공유
     onAddcartItem(item) {
-        const newCartItems = { ...this.cartItems }
+        const newCartItems = [ ...this.cartItems ]
         newCartItems.push(item);
         this.cartItems = newCartItems;
 
@@ -55,7 +55,7 @@ export default class App extends View {
                 <detail-page 
                     .orderTypeIndex=${this.orderTypeIndex}
                     .onSetOrderTypeIndex=${this.onSetOrderTypeIndex.bind(this)}
-                    .onAddCartItem=${this.onAddcartItem}
+                    .onAddCartItem=${this.onAddcartItem.bind(this)}
                 >
                 </detail-page>
                 `;
