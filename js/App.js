@@ -64,7 +64,6 @@ export default class App extends View {
                 <order-page 
                     .cartItem=${this.cartItem}
                     .onDeleteCartItem=${console.log}
-                    .onResetCartItems=${console.log}
                 >
                 </order-page>
                 `;

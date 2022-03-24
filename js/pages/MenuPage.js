@@ -6,12 +6,12 @@ import { getMoneyString } from "../utils/currency.js";
 import View from '../view.js';
 
 export default class MenuPage extends View {
-    constructor(orderTypeIndex, onSetOrderTypeIndex, cartItem=[]) {
+    constructor(orderTypeIndex, onSetOrderTypeIndex, cartItems=[]) {
         super();
 
         this.orderTypeIndex = orderTypeIndex;
         this.onSetOrderTypeIndex = onSetOrderTypeIndex;
-        this.cartItems = cartItem;
+        this.cartItems = cartItems;
         
         this.recentMenuItems = [];
         this.menuGroups = [];
@@ -127,7 +127,7 @@ export default class MenuPage extends View {
                         </div>
                         <!-- // 주문분류 -->
                         <!-- 최근 주문 내역 -->
-                        <recent-menu-list .recentMenuItems=${this.recentMenuItems} .redirectDetailPage=${this.redirectDetailPage}></recent-menu-list>
+                        <recent-menu-list .recentMenuItems=${this.recentMenuItems} .redirectDetailPage=${this.redirectDetailPage} .cartItems=${this.cartItems}></recent-menu-list>
                         <!-- // 최근 주문 내역 -->
                     </div>
                 </div>
@@ -151,7 +151,7 @@ export default class MenuPage extends View {
 
             <!-- 메뉴 리스트 영역 -->
             ${this.menuGroups.map((menuGroup) => 
-                html `<menu-list .menuGroup=${menuGroup} .redirectDetailPage=${this.redirectDetailPage}></menu-list>`
+                html `<menu-list .menuGroup=${menuGroup} .redirectDetailPage=${this.redirectDetailPage} .cartItems=${this.cartItems}></menu-list>`
             )}
             <!-- // 메뉴 리스트 영역 -->
 

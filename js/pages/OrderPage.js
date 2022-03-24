@@ -28,7 +28,7 @@ const ACCORDION_ITEMS = [
 ];
 
 export default class OrderPage extends View {
-    constructor(cartItem=[], onDeleteCartItem, onResetCartItems){
+    constructor(cartItem=[], onDeleteCartItem){
         super();
 
         this.cartItem = cartItem;

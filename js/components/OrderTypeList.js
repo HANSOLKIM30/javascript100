@@ -4,7 +4,7 @@ import View from "../view";
 export default class OrderTypeList extends View {
     render() {
         return html`
-        <div class="type-list">
+        <div class="type-list" onClick="popupClose()">
             <a href="#" class="type-item">
                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
                     <path fill="currentColor"
