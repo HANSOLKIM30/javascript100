@@ -19,6 +19,9 @@ export default class App extends View {
         window.onpopstate = () => {
             const [, page] = location.pathname.split('/');  // url의 두번째 인자를 뽑아오기
             this.currentPage = page;
+
+            // 페이지가 바뀔 때마다 페이지 상단으로 이동
+            window.scrollTo(0, 0);
         } 
     }
 
@@ -59,6 +62,21 @@ export default class App extends View {
         dispatchEvent(new PopStateEvent('popstate'));
     }
 
+    onDeleteCartItem(menuId) {
+
+        const newCartItems = [ ...this.cartItems ];
+        const targetIndex = newCartItems.findIndex((item) => item.menu.id === menuId);
+
+        if(targetIndex === -1 ) {
+            return;
+        } 
+
+        // splice를 통해 배열 삭제 배열 삭제
+        newCartItems.splice(targetIndex, 1);
+
+        this.cartItems = newCartItems;
+    }
+
     // ***라우팅 구현***
     route() {
         switch (this.currentPage) {
@@ -76,7 +94,7 @@ export default class App extends View {
                 <order-page
                     .orderTypeIndex=${this.orderTypeIndex}
                     .cartItems=${this.cartItems}
-                    .onDeleteCartItem=${console.log}
+                    .onDeleteCartItem=${this.onDeleteCartItem.bind(this)}
                 >
                 </order-page>
                 `;

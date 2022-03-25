@@ -39,6 +39,11 @@ export default class OrderPage extends View {
         this.cartItems = cartItems;
         this.onDeleteCartItem = onDeleteCartItem;
         this.onResetCartItems = onResetCartItems;
+
+        this.requestText = '';
+        this.tel = '';
+        this.isModalOpen = false;
+        this.needDisposable = true;
     }
 
     static get properties() {
@@ -47,6 +52,10 @@ export default class OrderPage extends View {
             cartItems: { type: Array },
             onDeleteCartItem: { type: Function },
             onResetCartItems: { type: Function },
+            requestText: { type: String },
+            tel: { type: String },
+            isModalOpen: { type: Boolean },
+            needDisposable: { type: Boolean },
         }
     }
 
@@ -82,6 +91,10 @@ export default class OrderPage extends View {
         target.amount += 1;
 
         this.cartItems = newCartItems;
+    }
+
+    setNeedDisposable(needDisposable) {
+        this.needDisposable = needDisposable;
     }
 
     render() {
@@ -159,7 +172,7 @@ export default class OrderPage extends View {
                                                     <p class="menu-price">${getMoneyString(item.menu.price)}원</p>
                                                 </div>
                                             </div>
-                                            <button class="btn-delete">
+                                            <button class="btn-delete" @click=${() => this.onDeleteCartItem(item.menu.id)}>
                                                 <img src="../assets/images/ico-close.svg" alt="삭제" class="ico-delete">
                                             </button>
                                         </li>
@@ -193,11 +206,11 @@ export default class OrderPage extends View {
                                     <p class="info-title">일회용 수저, 포크</p>
                                     <div class="option-group">
                                         <div class="option-item">
-                                            <input type="radio" id="need" class="input-radio" name="disposables" checked>
+                                            <input type="radio" id="need" class="input-radio" name="disposables" .checked=${this.needDisposable} @click=${this.setNeedDisposable(true)}>
                                             <label for="need" class="input-radio-button need">필요해요</label>
                                         </div>
                                         <div class="option-item">
-                                            <input type="radio" id="no-need" class="input-radio" name="disposables">
+                                            <input type="radio" id="no-need" class="input-radio" name="disposables" .checked=${this.needDisposable} @click=${this.setNeedDisposable(false)}>
                                             <label for="no-need" class="input-radio-button no-need">필요 없어요</label>
                                         </div>
                                     </div>
@@ -205,12 +218,12 @@ export default class OrderPage extends View {
 
                                 <li class="info-item">
                                     <p class="info-title">요청사항</p>
-                                    <input type="text" placeholder="(선택) 요청사항을 입력해 주세요." class="input-text">
+                                    <input type="text" placeholder="(선택) 요청사항을 입력해 주세요." class="input-text" value=${this.requestText} @change=${this.onChangeRequestText.bind(this)}>
                                 </li>
 
                                 <li class="info-item">
                                     <p class="info-title">주문자 연락처 <span class="fw700 color-point">(필수)</span></p>
-                                    <input type="text" placeholder="연락처를 입력해 주세요." class="input-text" required>
+                                    <input type="text" placeholder="연락처를 입력해 주세요." class="input-text" required value=${this.tel} @change=${this.onChangeTel.bind(this)}>
                                 </li>
                             </ul>
                         </div>

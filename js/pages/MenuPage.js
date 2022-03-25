@@ -65,15 +65,11 @@ export default class MenuPage extends View {
         // 브라우저의 세션 기록 스택에 상태를 추가
         history.pushState(null, null, `/detail/${id}`);
         dispatchEvent(new PopStateEvent('popstate'));
-
-        window.scrollTo(0, 0);
     }
 
     redirectOrderPage() {
         history.pushState(null, null, 'order');
         dispatchEvent(new PopStateEvent('popstate'));
-
-        window.scrollTo(0, 0)
     }
 
     getTotalAmount() {
