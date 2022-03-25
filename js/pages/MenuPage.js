@@ -6,12 +6,13 @@ import { getMoneyString } from "../utils/currency.js";
 import View from '../view.js';
 
 export default class MenuPage extends View {
-    constructor(orderTypeIndex, onSetOrderTypeIndex, cartItems=[]) {
+    constructor(orderTypeIndex, onSetOrderTypeIndex, cartItems=[], firstVisit) {
         super();
 
         this.orderTypeIndex = orderTypeIndex;
         this.onSetOrderTypeIndex = onSetOrderTypeIndex;
         this.cartItems = cartItems;
+        this.fisrtVisit = firstVisit;
         
         this.recentMenuItems = [];
         this.menuGroups = [];
@@ -85,7 +86,7 @@ export default class MenuPage extends View {
         );
 
         return html `
-        <div class="container">
+        <div class="container ${this.firstVisit ? 'fixed' : ''}">
             <!-- Header -->
             <order-header></order-header>
             <!-- // Header -->
@@ -182,10 +183,10 @@ export default class MenuPage extends View {
             </div>
             <!-- // 맨 위로 -->
                     
-            <div class="dimmed-layer hidden"></div>
-            <div class="order-type-popup hidden">
+            <div class="dimmed-layer ${this.firstVisit ? '' : 'hidden'}"></div>
+            <div class="order-type-popup ${this.firstVisit ? '' : 'hidden'}">
                 <p class="title">어디서 드시나요?</p>
-                <order-type-list></order-type-list>
+                <order-type-list .onSetOrderTypeIndex=${this.onSetOrderTypeIndex}></order-type-list>
             </div>
         </div>
         `;

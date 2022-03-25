@@ -13,6 +13,7 @@ export default class App extends View {
         this.currentPage = 'menu';
         this.orderTypeIndex = 0;    // 전 페이지에 걸쳐 쓰일 수 있으므로 App class에 선언
         this.cartItems = [];
+        this.firstVisit = true;
 
         // onPopState: 같은 document에 관한 두개의 히스토리 엔트리에 변화가 일어날 때마다, popstate event가 window 객체에 붙게 된다.
         window.onpopstate = () => {
@@ -28,12 +29,20 @@ export default class App extends View {
             currentPage: { type: String },
             orderTypeIndex: { type: Number },
             cartItems: { type: Array },
+            firstVisit: { type: Boolean },
+        }
+    }
+
+    onSetFirstVisit() {
+        if(this.firstVisit === true) {
+            this.firstVisit = false;
         }
     }
 
     // 주문타입에 대한 index(orderTypeIndex)를 모든 페이지가 공유
     onSetOrderTypeIndex(orderTypeIndex) {
         this.orderTypeIndex = orderTypeIndex;
+        this.onSetFirstVisit();
     }
 
     // 장바구니 정보: 모든 페이지가 공유
@@ -73,6 +82,7 @@ export default class App extends View {
                     .orderTypeIndex=${this.orderTypeIndex}
                     .onSetOrderTypeIndex=${this.onSetOrderTypeIndex.bind(this)}
                     .cartItems=${this.cartItems}
+                    .firstVisit=${this.firstVisit}
                 ></menu-page>
                 `;
         }

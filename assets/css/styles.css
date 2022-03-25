@@ -2475,6 +2475,10 @@ body.scroll-off {
   padding-bottom: 70px;
 }
 
+.container.fixed {
+  position: fixed;
+}
+
 .common-inner {
   margin: 0 auto;
   max-width: 720px;

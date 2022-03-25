@@ -19,6 +19,10 @@
         padding-top: $place-header-height + $place-tab-height;
         padding-bottom: $border-box-area-height;
     }
+
+    &.fixed {
+        position: fixed;
+    }
 }
 
 .common-inner {

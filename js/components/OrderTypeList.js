@@ -2,10 +2,22 @@ import { html } from "lit";
 import View from "../view";
 
 export default class OrderTypeList extends View {
+    constructor(onSetOrderTypeIndex) {
+        super();
+        
+        this.onSetOrderTypeIndex = onSetOrderTypeIndex;
+    }
+
+    static get properties() {
+        return {
+            onSetOrderTypeIndex: { type: Function },
+        }
+    }
+
     render() {
         return html`
-        <div class="type-list" onClick="popupClose()">
-            <a href="#" class="type-item">
+        <div class="type-list">
+            <a class="type-item" @click=${() => this.onSetOrderTypeIndex(0)}>
                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
                     <path fill="currentColor"
                         d="M232,359.6V264a8,8,0,0,0-8-8c-48.86,0-55.71,83.833-55.978,87.4a8,8,0,0,0,4.4,7.754L184,356.944v2.66l-6.2,62.008A24,24,0,0,0,201.68,448h12.64A24,24,0,0,0,238.2,421.612ZM184.549,339.33a175.605,175.605,0,0,1,7.365-33.019c6.148-18.091,14.226-29.1,24.086-32.853V352H200a8,8,0,0,0-4.422-7.155Zm35.7,90.038A7.91,7.91,0,0,1,214.32,432H201.68a8,8,0,0,1-7.961-8.8L199.24,368h17.52l5.521,55.2A7.908,7.908,0,0,1,220.252,429.368Z" />
@@ -17,7 +29,7 @@ export default class OrderTypeList extends View {
                 <p class="desc">포장해서 가져갈게요</p>
                 <span class="btn-selection">선택</span>
             </a>
-            <a href="#" class="type-item">
+            <a class="type-item" @click=${() => this.onSetOrderTypeIndex(1)}>
                 <svg class="icon" height="637pt" viewBox="-20 -46 637.33396 637" width="637pt"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill="currentColor"
