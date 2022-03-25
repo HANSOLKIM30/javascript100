@@ -65,11 +65,21 @@ export default class MenuPage extends View {
         // 브라우저의 세션 기록 스택에 상태를 추가
         history.pushState(null, null, `/detail/${id}`);
         dispatchEvent(new PopStateEvent('popstate'));
+
+        window.scrollTo(0, 0);
     }
 
     redirectOrderPage() {
         history.pushState(null, null, 'order');
         dispatchEvent(new PopStateEvent('popstate'));
+
+        window.scrollTo(0, 0)
+    }
+
+    getTotalAmount() {
+        return this.cartItems.reduce((totalAmount, cartItem) => {
+            return totalAmount + cartItem.amount;
+        }, 0);
     }
 
     render() {
@@ -78,7 +88,7 @@ export default class MenuPage extends View {
             categoryName,
         }));
 
-        const cartItemsMenuString = this.cartItems.map((item) => item.menu.name).join('+');
+        
 
         // 배열의 각 요소에 대해 주어진 리듀서(reducer) 함수를 실행하고, 하나의 결과값을 반환한다.
         const cartItemsTotalPrice = this.cartItems.reduce(
@@ -162,14 +172,14 @@ export default class MenuPage extends View {
                 <div class="order-box-area">
                     <div class="common-inner">
                         <div>
-                            <p class="menu-name">${cartItemsMenuString}</p>
+                            <p class="menu-name">${this.cartItems[0].menu.name + " 외 " + (this.getTotalAmount()-1) + "개"}</p>
                             <p class="menu-price">${getMoneyString(cartItemsTotalPrice)}원</p>
                         </div>
-                        <a href="./order.html" class="btn-order">
+                        <a class="btn-order" @click=${this.redirectOrderPage}>
                             <span class="txt">주문하기</span>
                             <span class="icon-cart">
                                 <img src="../assets/images/ico-cart-fill.svg" alt="" aria-hidden="true" class="ico-cart">
-                                <span class="num">${this.cartItems.length}</span>
+                                <span class="num">${this.getTotalAmount()}</span>
                             </span>
                         </a>
                     </div>

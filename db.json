@@ -4,7 +4,7 @@
         "id": 1,
         "name": "웜볼 1",
         "imageUrl": "https://ldb-phinf.pstatic.net/20200416_252/1587007251652svUkx_PNG/%C4%A5%B8%AE%BA%A3%C0%CC%C4%C1_%BF%FA%BA%BC.png?type=f459_345_60_sharpen",
-        "isPopular": false,
+        "isPopular": true,
         "price": 6900
       },
       {
@@ -18,14 +18,14 @@
         "id": 3,
         "name": "웜볼 3",
         "imageUrl": "https://ldb-phinf.pstatic.net/20200416_252/1587007251652svUkx_PNG/%C4%A5%B8%AE%BA%A3%C0%CC%C4%C1_%BF%FA%BA%BC.png?type=f459_345_60_sharpen",
-        "isPopular": true,
+        "isPopular": false,
         "price": 6900
       },
       {
         "id": 4,
         "name": "샐러드 1",
         "imageUrl": "https://ldb-phinf.pstatic.net/20200520_46/1589962579612L1Bx3_PNG/%B3%AA%B8%B8%C0%C7_%BB%F8%B7%AF%B5%F0.png?type=f220_220_60_sharpen",
-        "isPopular": false,
+        "isPopular": true,
         "price": 6900
       }
     ],
@@ -67,9 +67,9 @@
             "price": 6900,
             "reviewPoint": 5.0,
             "cartCount": 0,
-            "soldOut": true,
-            "isNew": false,
-            "isPopular": true
+            "soldOut": false,
+            "isNew": true,
+            "isPopular": false
           },
           {
             "id": 7,
@@ -80,7 +80,7 @@
             "price": 6900,
             "reviewPoint": 5.0,
             "cartCount": 0,
-            "soldOut": true,
+            "soldOut": false,
             "isNew": true,
             "isPopular": true
           }
@@ -91,7 +91,7 @@
         "categoryName": "시즈널 메뉴",
         "items": [
           {
-            "id": 1,
+            "id": 3,
             "name": "웜볼 3",
             "imageUrl": "https://ldb-phinf.pstatic.net/20200416_252/1587007251652svUkx_PNG/%C4%A5%B8%AE%BA%A3%C0%CC%C4%C1_%BF%FA%BA%BC.png?type=f220_220_60_sharpen",
             "orderCount": 11,
@@ -103,14 +103,14 @@
             "isPopular": false
           },
           {
-            "id": 4,
+            "id": 5,
             "name": "샐러드 2",
             "imageUrl": "https://ldb-phinf.pstatic.net/20200520_46/1589962579612L1Bx3_PNG/%B3%AA%B8%B8%C0%C7_%BB%F8%B7%AF%B5%F0.png?type=f220_220_60_sharpen",
             "orderCount": 11,
             "description": "담백한 리코타치즈, 크랜베리, 견과류, 통밀빵이 어울리는 샐러드 *추천드레싱 : 발사믹 드레싱",
             "price": 6900,
             "reviewPoint": 5.0,
-            "soldOut": false,
+            "soldOut": true,
             "isNew": true,
             "isPopular": false
           },
@@ -123,12 +123,12 @@
             "price": 6900,
             "reviewPoint": 5.0,
             "cartCount": 0,
-            "soldOut": true,
+            "soldOut": false,
             "isNew": true,
-            "isPopular": false
+            "isPopular": true
           },
           {
-            "id": 7,
+            "id": 8,
             "name": "샌드 2",
             "imageUrl": "https://ldb-phinf.pstatic.net/20200520_244/1589962381120h9wtY_JPEG/%C4%A1%C5%B2%C5%E4%B8%B6%C5%E4_%BB%F7%B5%E5.jpg?type=f220_220_60_sharpen",
             "orderCount": 11,
@@ -136,7 +136,7 @@
             "price": 6900,
             "reviewPoint": 5.0,
             "cartCount": 0,
-            "soldOut": true,
+            "soldOut": false,
             "isNew": true,
             "isPopular": false
           }
@@ -147,7 +147,7 @@
         "categoryName": "시그니처 샐러드",
         "items": [
           {
-            "id": 1,
+            "id": 4,
             "name": "샐러드 1",
             "imageUrl": "https://ldb-phinf.pstatic.net/20200520_46/1589962579612L1Bx3_PNG/%B3%AA%B8%B8%C0%C7_%BB%F8%B7%AF%B5%F0.png?type=f220_220_60_sharpen",
             "orderCount": 11,
@@ -159,19 +159,19 @@
             "isPopular": true
           },
           {
-            "id": 2,
+            "id": 5,
             "name": "샐러드 2",
             "imageUrl": "https://ldb-phinf.pstatic.net/20200520_46/1589962579612L1Bx3_PNG/%B3%AA%B8%B8%C0%C7_%BB%F8%B7%AF%B5%F0.png?type=f220_220_60_sharpen",
             "orderCount": 11,
             "description": "담백한 리코타치즈, 크랜베리, 견과류, 통밀빵이 어울리는 샐러드 *추천드레싱 : 발사믹 드레싱",
             "price": 6900,
             "reviewPoint": 5.0,
-            "soldOut": false,
+            "soldOut": true,
             "isNew": true,
             "isPopular": false
           },
           {
-            "id": 3,
+            "id": 6,
             "name": "샐러드 3",
             "imageUrl": "https://ldb-phinf.pstatic.net/20200520_46/1589962579612L1Bx3_PNG/%B3%AA%B8%B8%C0%C7_%BB%F8%B7%AF%B5%F0.png?type=f220_220_60_sharpen",
             "orderCount": 11,
@@ -179,7 +179,7 @@
             "price": 6900,
             "reviewPoint": 5.0,
             "cartCount": 0,
-            "soldOut": true,
+            "soldOut": false,
             "isNew": true,
             "isPopular": false
           }
@@ -190,7 +190,7 @@
         "categoryName": "웜볼",
         "items": [
           {
-            "id": 4,
+            "id": 1,
             "name": "웜볼 1",
             "imageUrl": "https://ldb-phinf.pstatic.net/20200416_252/1587007251652svUkx_PNG/%C4%A5%B8%AE%BA%A3%C0%CC%C4%C1_%BF%FA%BA%BC.png?type=f220_220_60_sharpen",
             "orderCount": 11,
@@ -202,7 +202,7 @@
             "isPopular": true
           },
           {
-            "id": 5,
+            "id": 2,
             "name": "웜볼 2",
             "imageUrl": "https://ldb-phinf.pstatic.net/20200416_252/1587007251652svUkx_PNG/%C4%A5%B8%AE%BA%A3%C0%CC%C4%C1_%BF%FA%BA%BC.png?type=f220_220_60_sharpen",
             "orderCount": 11,
@@ -214,7 +214,7 @@
             "isPopular": false
           },
           {
-            "id": 6,
+            "id": 3,
             "name": "웜볼 3",
             "imageUrl": "https://ldb-phinf.pstatic.net/20200416_252/1587007251652svUkx_PNG/%C4%A5%B8%AE%BA%A3%C0%CC%C4%C1_%BF%FA%BA%BC.png?type=f220_220_60_sharpen",
             "orderCount": 11,
@@ -222,7 +222,7 @@
             "price": 6900,
             "reviewPoint": 5.0,
             "cartCount": 0,
-            "soldOut": true,
+            "soldOut": false,
             "isNew": true,
             "isPopular": false
           }

@@ -510,6 +510,7 @@ body.scroll-off {
 }
 
 .amount-select {
+  float: left;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -906,15 +907,24 @@ body.scroll-off {
 }
 
 .order-content-body .menu-item {
+  display: block;
   position: relative;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
   padding: 22px 18px;
+}
+
+.order-content-body .menu-item .menu-info-area {
+  overflow: hidden;
 }
 
 .order-content-body .menu-item .menu-name-group {
   padding-right: 40px;
+}
+
+.order-content-body .menu-item .menu-img-area {
+  position: relative;
+  float: left;
+  width: 74px;
+  height: 74px;
 }
 
 .order-content-body .menu-item .menu-name {
@@ -939,21 +949,13 @@ body.scroll-off {
 }
 
 .order-content-body .menu-item .amount-and-price {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   margin-top: 18px;
 }
 
 .order-content-body .menu-item .amount-and-price .menu-price {
   margin-top: 0;
   font-size: 18px;
+  float: right;
 }
 
 .order-content-body .menu-item .btn-delete {
@@ -2467,6 +2469,7 @@ body.scroll-off {
 
 .container {
   min-height: 100vh;
+  min-width: 390px;
   background-color: #f4f7f9;
 }
 
@@ -2477,6 +2480,9 @@ body.scroll-off {
 
 .container.fixed {
   position: fixed;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 .common-inner {

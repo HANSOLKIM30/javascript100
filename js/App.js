@@ -47,8 +47,11 @@ export default class App extends View {
 
     // 장바구니 정보: 모든 페이지가 공유
     onAddcartItem(item) {
-        const newCartItems = [ ...this.cartItems ]
+
+        const newCartItems = [ ...this.cartItems ];
+
         newCartItems.push(item);
+
         this.cartItems = newCartItems;
 
         // 메뉴페이지로 돌아가기
@@ -70,8 +73,9 @@ export default class App extends View {
                 `;
             case 'order' :
                 return html`
-                <order-page 
-                    .cartItem=${this.cartItem}
+                <order-page
+                    .orderTypeIndex=${this.orderTypeIndex}
+                    .cartItems=${this.cartItems}
                     .onDeleteCartItem=${console.log}
                 >
                 </order-page>

@@ -85,14 +85,25 @@
     }
 
     .menu-item {
+        display: block;
         position: relative;
-        align-items: flex-start;
         padding: 22px $m-padding;
+
+        .menu-info-area {
+            // overflow 속성을 사용할 경우, 새로운 블록 서식 문맥을 생성.
+            overflow: hidden;
+        }
 
         .menu-name-group {
             padding-right: 40px;    // 메뉴의 이름이 길어졌을 때 btn-close와 겹치지 않도록 하기 위함.(안전영역 확보가 중요)
         }
 
+        .menu-img-area {
+            position: relative;
+            float: left;
+            width: 74px;
+            height: 74px;
+        }
         .menu-name {
             line-height: 23px;
             font-size: 18px;
@@ -115,14 +126,12 @@
         }
 
         .amount-and-price {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-top: 18px;
 
             .menu-price {
                 margin-top: 0;
                 font-size: 18px;
+                float: right;
             }
         }
 
