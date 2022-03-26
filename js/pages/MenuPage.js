@@ -168,7 +168,7 @@ export default class MenuPage extends View {
                 <div class="order-box-area">
                     <div class="common-inner">
                         <div>
-                            <p class="menu-name">${this.cartItems[0].menu.name + " 외 " + (this.getTotalAmount()-1) + "개"}</p>
+                            <p class="menu-name">${this.cartItems.length > 1 ? this.cartItems[0].menu.name + " 외 " + (this.getTotalAmount()-1) + "개" : this.cartItems[0].menu.name}</p>
                             <p class="menu-price">${getMoneyString(cartItemsTotalPrice)}원</p>
                         </div>
                         <a class="btn-order" @click=${this.redirectOrderPage}>
