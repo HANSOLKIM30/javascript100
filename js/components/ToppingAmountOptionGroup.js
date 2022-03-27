@@ -3,11 +3,12 @@ import { getMoneyString } from "../utils/currency";
 import View from "../view";
 import { SpinButton } from "./SpinButton";
 
+
 export default class extends View {
     constructor(items, onIncreaseOptionAmount, onDecreaseOptionAmount) {
         super();
 
-        this.isOption = true;
+        //this.isOption = true;
         this.items = items;
         this.onIncreaseOptionAmount = onIncreaseOptionAmount;
         this.onIncreaseOptionAmount = onDecreaseOptionAmount;
@@ -15,7 +16,7 @@ export default class extends View {
 
     static get properties() {
         return {
-            isOption: { type: Boolean },
+            //isOption: { type: Boolean },
             items: { type: Array },
             onIncreaseOptionAmount: { type: Function },
             onIncreaseOptionAmount: { type: Function },
@@ -40,12 +41,12 @@ export default class extends View {
                             ${item.name} <span class="price">+${getMoneyString(item.price)}</span>
                         </span>
                         </label>
-                        <!-- onDecreaseOptionAmount, onIncreaseOptionAmount의 실행을 막기 위해, 화살표 함수를 통해 expression을 return  -->
+                        <!-- onDecreaseOptionAmount, onIncreaseOptionAmount의 실행을 막기 위해, 화살표 함수를 통해 expression을 return -->
                         ${SpinButton({
                             isOption: true,
                             count: item.amount,
-                            onDecrease: () => this.onDecreaseOptionAmount(item.name),
                             onIncrease: () => this.onIncreaseOptionAmount(item.name),
+                            onDecrease: () => this.onDecreaseOptionAmount(item.name),
                         })}
                     </li>
                     `)}

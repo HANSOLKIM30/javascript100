@@ -16,6 +16,11 @@ const TABS = [
     }
 ];
 
+const ORDER_TYPE = [
+    "포장",
+    "매장",
+    "배달"
+]
 const ORDER_TYPE_HEADING = [
     "포장할게요",
     "매장에서 식사를 준비해둘게요",
@@ -28,4 +33,23 @@ const ORDER_TYPE_MESSAGE = [
     '계신 곳으로 배달됩니다.',
 ];
 
-export { TABS, ORDER_TYPE_HEADING, ORDER_TYPE_MESSAGE };
+const DEFAULT_MENU = {
+    id: 1,
+    name: "음식 이름",
+    reviewPoint: 0.0,
+    description: "불러오는 중",
+    price: 0,
+    imageUrl:
+      "https://ldb-phinf.pstatic.net/20200416_252/1587007251652svUkx_PNG/%C4%A5%B8%AE%BA%A3%C0%CC%C4%C1_%BF%FA%BA%BC.png?type=f220_220_60_sharpen",
+    pictures: [],
+    reviews: [],
+};
+
+const DEFAULT_OPTION = {
+    id: 1,
+    baseOptions: [],
+    toppingSelectOptions: [],
+    toppingAmountSelectOptions: [],
+}
+
+export { TABS, ORDER_TYPE, ORDER_TYPE_HEADING, ORDER_TYPE_MESSAGE, DEFAULT_MENU, DEFAULT_OPTION };

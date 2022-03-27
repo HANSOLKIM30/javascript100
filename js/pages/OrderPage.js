@@ -1,21 +1,20 @@
 import { html } from "lit";
-import { SpinButton } from "../components/SpinButton";
-import { ORDER_TYPE_HEADING, ORDER_TYPE_MESSAGE } from "../constants/constants";
+
+import { ORDER_TYPE_HEADING, ORDER_TYPE_MESSAGE} from "../constants/constants";
 import { getMoneyString } from "../utils/currency";
 import View from "../view";
 
-const ACCORDION_ITEMS = [
-  {
-    title: "개인정보 수집 동의",
-    content: `(1) 고객의 개인정보는 회원탈퇴 등 수집 및 이용목적이 달성되거나 동의철회 요청이 있는 경우 지체없이 파기됩니다. 단,「전자상거래 등에서의 소비자보호에 관한 법률」 등 관련법령의 규정에 의하여 다음과 같이 거래 관련 권리 의무 관계의 확인 등을 이유로 일정기간 보유하여야 할 필요가 있을 경우에는 그 기간동안 보유합니다. 가. 「전자상거래 등에서의 소비자보호에 관한 법률」 제6조 - 계약 또는 청약 철회 등에 관한 기록 : 5년 - 대금결재 및 재화 등의 공급에 관한 기록 : 5년 - 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년 나. 「통신비밀보호법」 제15조의2 - 방문(로그)에 관한 기록: 1년 다. 기타 관련 법령 등 
+const ACCORDION_ITEMS = [{
+        title: "개인정보 수집 동의",
+        content: `(1) 고객의 개인정보는 회원탈퇴 등 수집 및 이용목적이 달성되거나 동의철회 요청이 있는 경우 지체없이 파기됩니다. 단,「전자상거래 등에서의 소비자보호에 관한 법률」 등 관련법령의 규정에 의하여 다음과 같이 거래 관련 권리 의무 관계의 확인 등을 이유로 일정기간 보유하여야 할 필요가 있을 경우에는 그 기간동안 보유합니다. 가. 「전자상거래 등에서의 소비자보호에 관한 법률」 제6조 - 계약 또는 청약 철회 등에 관한 기록 : 5년 - 대금결재 및 재화 등의 공급에 관한 기록 : 5년 - 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년 나. 「통신비밀보호법」 제15조의2 - 방문(로그)에 관한 기록: 1년 다. 기타 관련 법령 등 
       
     (2) 회사의 개인정보 파기방법은 다음과 같습니다. 가. 파기 절차 ① 회원가입 등을 위해 입력한 정보는 목적이 달성된 후 별도의 DB로 옮겨져(종이의 경우 별도의 서류함 내부 방침 및 기타 관련 법령에 의한 일정기간 저장된 후 파기됩니다. ② 동 개인정보는 법률에 의한 경우가 아니고서는 보유되는 이외의 다른 목적으로 이용되지 않습니다. 나. 파기 방법 ① 종이에 출력된 개인정보는 분쇄기로 분쇄하거나 소각을 통하여 파기합니다. ② 전자적 파일 형태로 저장된 개인정보는 기록을 재생할 수 없는 기술적 방법을 사용하여 삭제합니다. 
         
     (3) 회사는 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 제29조 제2항에 따라 휴면회원(최근 12개월 동안 서비스를 이용하지 아니한 회원)에 대해 회원자격 상실에 대한 안내문을 통지하고, 안내문에서 정한 기한 내에 답변이 없을 경우 회원자격을 상실시킬 수 있습니다. 이 경우, 휴면회원의 개인정보는 다른 회원의 개인정보와 분리하여 별도로 저장·관리 되며, 분리 저장된 개인정보는 법정보관기간 경과 후 파기하고 있습니다. 파기되지 않은 개인 정보 중 해당 이용자의 요청이 있는 경우 고객 정보는 서비스 이용을 재개하는 시점에 다시 제공됩니다.`,
-  },
-  {
-    title: "개인정보 제공 동의",
-    content: `(1) 회사는 고객의 개인정보를 '제1조 개인정보의 수집항목 및 이용목적'에서 고지한 범위를 넘어 이용하거나 타인 또는 타기업, 기관에 제공하지 않습니다. 
+    },
+    {
+        title: "개인정보 제공 동의",
+        content: `(1) 회사는 고객의 개인정보를 '제1조 개인정보의 수집항목 및 이용목적'에서 고지한 범위를 넘어 이용하거나 타인 또는 타기업, 기관에 제공하지 않습니다. 
       
       (2) 다음은 예외로 합니다. 
       
@@ -23,45 +22,52 @@ const ACCORDION_ITEMS = [
       나. 통계작성, 학술연구나 시장조사 등을 위하여 특정 개인을 식별할 수 없는 형태로 광고주, 협력사나 연구단체 등에 제공하는 경우 
       다. 기타 관계법령에서 정한 절차에 따른 요청이 있는 경우 상기사항에 의해 개인정보를 제공하는 경우에도 본래의 수집∙이용 목적에 반하여 무분별하게 정보가 제공되지 않도록 최대한 노력하겠습니다.
     `,
-  },
-  {
-    title: "주문취소 및 환불 유의사항",
-    content:
-      "구분 수집시기 필수/선택 수집항목 이용목적 보유기간 회원 가입시 필수 아이디 비밀번호 비밀번호 확인 질문,답변 이메일, 회원인증값(모바일인증) 회원인증을 통한 이름,생년월일 만 14세 이상 여부 회원가입시 본인여부 확인, 서비스 이용 및 상담, 공지사항 전달 회원탈퇴시 또는 법정 의무 보유기간 선택 주소 일반전화 휴대전화 주문시 필수 주문자 정보(이름,주소,휴대전화,이메일) 수취자 정보(이름,주소,휴대전화) 결제 승인정보 주문상품의 결제 및 배송 선택 주문자 일반전화 수취자 일반전화 배송 메시지 해외배송 여부 비회원 주문시 필수 주문자 정보(이름,주소,휴대전화,이메일,주문조회 비밀번호 ,비밀번호 확인) 수취자 정보(이름,주소,휴대전화) 결제 승인정보 주문상품의 결제 및 배송 법정 의무 보유기간 선택 주문자 일반전화 수취자 일반전화 배송메세지 해외배송여부 ※ 회사는 이 외에 고객님이 이용한 서면, 문자, 게시판, 메신저 등 다양한 상담채널별 문의와 이벤트 응모시 수집 항목, 목적, 보유기간에 대한 별도 동의를 받아 개인정보를 수집할 수 있습니다. ※ 회사는 이 법 또는 다른 법률에 특별한 규정이 있는 경우 개인정보를 수집 이용할 수 있습니다.",
-  },
+    },
+    {
+        title: "주문취소 및 환불 유의사항",
+        content: "구분 수집시기 필수/선택 수집항목 이용목적 보유기간 회원 가입시 필수 아이디 비밀번호 비밀번호 확인 질문,답변 이메일, 회원인증값(모바일인증) 회원인증을 통한 이름,생년월일 만 14세 이상 여부 회원가입시 본인여부 확인, 서비스 이용 및 상담, 공지사항 전달 회원탈퇴시 또는 법정 의무 보유기간 선택 주소 일반전화 휴대전화 주문시 필수 주문자 정보(이름,주소,휴대전화,이메일) 수취자 정보(이름,주소,휴대전화) 결제 승인정보 주문상품의 결제 및 배송 선택 주문자 일반전화 수취자 일반전화 배송 메시지 해외배송 여부 비회원 주문시 필수 주문자 정보(이름,주소,휴대전화,이메일,주문조회 비밀번호 ,비밀번호 확인) 수취자 정보(이름,주소,휴대전화) 결제 승인정보 주문상품의 결제 및 배송 법정 의무 보유기간 선택 주문자 일반전화 수취자 일반전화 배송메세지 해외배송여부 ※ 회사는 이 외에 고객님이 이용한 서면, 문자, 게시판, 메신저 등 다양한 상담채널별 문의와 이벤트 응모시 수집 항목, 목적, 보유기간에 대한 별도 동의를 받아 개인정보를 수집할 수 있습니다. ※ 회사는 이 법 또는 다른 법률에 특별한 규정이 있는 경우 개인정보를 수집 이용할 수 있습니다.",
+    },
 ];
 
 export default class OrderPage extends View {
-    constructor(orderTypeIndex, cartItems=[], onDeleteCartItem, onResetCartItems){
+    constructor(orderTypeIndex, cartItems = [], onDeleteCartItem, onResetCartItems, onAddcartItem) {
         super();
 
         this.orderTypeIndex = orderTypeIndex
         this.cartItems = cartItems;
         this.onDeleteCartItem = onDeleteCartItem;
         this.onResetCartItems = onResetCartItems;
+        this.onAddcartItem = onAddcartItem;
 
         this.requestText = '';
-        this.tel = '';
+        this.contactText = '';
         this.isModalOpen = false;
         this.needDisposable = true;
+
+        this.isPopupOpen = false;
+        this.item = {};
     }
 
     static get properties() {
         return {
             orderTypeIndex: { type: Number },
-            cartItems: { type: Array },
+            cartItems: { type: Array},
             onDeleteCartItem: { type: Function },
             onResetCartItems: { type: Function },
+            onAddcartItem: { type: Function },
             requestText: { type: String },
-            tel: { type: String },
+            contactText: { type: String },
             isModalOpen: { type: Boolean },
             needDisposable: { type: Boolean },
+
+            isPopupOpen: { type: Boolean },
+            item: { type: Object }
         }
     }
 
     redirectMenuListPage() {
         history.pushState(null, null, '/');
-        this.dispatchEvent(new PopStateEvent('popstate'));
+        dispatchEvent(new PopStateEvent('popstate'));
 
         window.scrollBy({
             top: 0,
@@ -76,7 +82,7 @@ export default class OrderPage extends View {
         const target = newCartItems.find((item) => menuId === item.menu.id);
 
         // 카트에 담긴 메뉴 수량은 1보다 작아질 수 없다.
-        if(target.amount <= 1) {
+        if (target.amount <= 1) {
             return;
         }
         target.amount -= 1;
@@ -93,8 +99,56 @@ export default class OrderPage extends View {
         this.cartItems = newCartItems;
     }
 
+    openOrderPopup() {
+        this.isPopupOpen = true;
+    }
+
+    closeOrderPopup() {
+        this.isPopupOpen = false;
+    }
+
+    getSelectedItem(item) {
+        this.item = item;
+        this.openOrderPopup();
+    }
+
+    getMenu() {
+        return this.item.menu;
+    }
+
+    getMenuAmount() {
+        return this.item.amount;
+    }
+
+    getOption() {
+        return this.item.option;
+    }
+
     setNeedDisposable(needDisposable) {
         this.needDisposable = needDisposable;
+    }
+
+    handleRequestTextChange(event) {
+        const value = event.target.value;
+        this.requestText = value;
+    }
+
+    handleContactTextChange(event) {
+        const {
+            value
+        } = event.target;
+        this.contactText = value;
+    }
+
+    onChangeOption(menuId, option) {
+        const newCartItems = [...this.cartItems];
+        const target = newCartItems.find((item) => menuId === item.menu.id);
+
+        target.option = option;
+
+        this.cartItems = newCartItems;
+
+        this.isPopupOpen=false;
     }
 
     render() {
@@ -133,7 +187,7 @@ export default class OrderPage extends View {
                             ${this.cartItems.length === 0 ? 
                                 html `
                                     <!-- 담은 메뉴 없음 -->
-                                    <div class="no-order hidden">
+                                    <div class="no-order">
                                         <img src="../assets/images/ico-exclaim.svg" alt="" aria-hidden="true">
                                         <p class="txt">담은 메뉴가 없습니다.</p>
                                     </div>
@@ -142,44 +196,14 @@ export default class OrderPage extends View {
                                 : 
                                 html `
                                 <!-- 담은 메뉴 있음 -->
-                                <ul class="menu-list">
-                                    ${this.cartItems.map(
-                                        (item) => html `
-                                        <li class="menu-item">
-                                            <div class="menu-img-area">
-                                                <!-- 이미지 최적화를 위해 가로, 세로를 html 내부에 적어주는 것이 좋다. -->
-                                                <img 
-                                                    src="${item.menu.imageUrl}" 
-                                                    alt="${item.menu.name}"
-                                                    class="menu-img" 
-                                                    width="74" 
-                                                    height="74"
-                                                >
-                                            </div>
-                                            <div class="menu-info-area">
-                                                <p class="menu-name-group">
-                                                    <span class="menu-name">${item.menu.name}</span>
-                                                </p>
-                                                <p class="menu-desc">${item.menu.description}</p>
-                                                <button class="btn-option">옵션변경</button>
-                                                <div class="amount-and-price">
-                                                    ${SpinButton({
-                                                        isOption: false, 
-                                                        count: item.amount,
-                                                        onDecrease: () => this.onDecreaseOrderAmount(item.menu.id),
-                                                        onIncrease: () => this.onIncreaseOrderAmount(item.menu.id)
-                                                    })}
-                                                    <p class="menu-price">${getMoneyString(item.menu.price)}원</p>
-                                                </div>
-                                            </div>
-                                            <button class="btn-delete" @click=${() => this.onDeleteCartItem(item.menu.id)}>
-                                                <img src="../assets/images/ico-close.svg" alt="삭제" class="ico-delete">
-                                            </button>
-                                        </li>
-                                        `
-                                    )}
-                                </ul>
-
+                                <order-select-list
+                                    .cartItems=${this.cartItems}
+                                    .onDecreaseOrderAmount=${this.onDecreaseOrderAmount.bind(this)}
+                                    .onIncreaseOrderAmount=${this.onIncreaseOrderAmount.bind(this)}
+                                    .getSelectedItem=${this.getSelectedItem.bind(this)}
+                                    .onDeleteCartItem=${this.onDeleteCartItem.bind(this)}  
+                                >
+                                </order-select-list>
                                 <div class="order-total">
                                     <span class="total-txt">총 주문금액</span>
                                     <span class="total-price">${getMoneyString(cartItemsTotalPrice)}원</span>
@@ -206,11 +230,25 @@ export default class OrderPage extends View {
                                     <p class="info-title">일회용 수저, 포크</p>
                                     <div class="option-group">
                                         <div class="option-item">
-                                            <input type="radio" id="need" class="input-radio" name="disposables" .checked=${this.needDisposable} @click=${this.setNeedDisposable(true)}>
+                                            <input 
+                                                type="radio" 
+                                                id="need" 
+                                                class="input-radio" 
+                                                name="disposables" 
+                                                .checked=${this.needDisposable} 
+                                                @click=${this.setNeedDisposable(true)}
+                                            >
                                             <label for="need" class="input-radio-button need">필요해요</label>
                                         </div>
                                         <div class="option-item">
-                                            <input type="radio" id="no-need" class="input-radio" name="disposables" .checked=${this.needDisposable} @click=${this.setNeedDisposable(false)}>
+                                            <input 
+                                                type="radio" 
+                                                id="no-need" 
+                                                class="input-radio" 
+                                                name="disposables" 
+                                                .checked=${!this.needDisposable} 
+                                                @click=${this.setNeedDisposable(false)}
+                                            >
                                             <label for="no-need" class="input-radio-button no-need">필요 없어요</label>
                                         </div>
                                     </div>
@@ -218,12 +256,27 @@ export default class OrderPage extends View {
 
                                 <li class="info-item">
                                     <p class="info-title">요청사항</p>
-                                    <input type="text" placeholder="(선택) 요청사항을 입력해 주세요." class="input-text" value=${this.requestText} @change=${this.onChangeRequestText.bind(this)}>
+                                    <input 
+                                        type="text" 
+                                        name="requestText"
+                                        placeholder="(선택) 요청사항을 입력해 주세요." 
+                                        class="input-text" 
+                                        value=${this.requestText} 
+                                        @change=${this.handleRequestTextChange}
+                                    >
                                 </li>
 
                                 <li class="info-item">
                                     <p class="info-title">주문자 연락처 <span class="fw700 color-point">(필수)</span></p>
-                                    <input type="text" placeholder="연락처를 입력해 주세요." class="input-text" required value=${this.tel} @change=${this.onChangeTel.bind(this)}>
+                                    <input 
+                                        type="text" 
+                                        name="contactText"
+                                        placeholder="연락처를 입력해 주세요." 
+                                        class="input-text" 
+                                        required 
+                                        value=${this.contactText} 
+                                        @change=${this.handleContactTextChange}
+                                    >
                                 </li>
                             </ul>
                         </div>
@@ -336,13 +389,30 @@ export default class OrderPage extends View {
                         <p class="modal-desc">모달에 관련된 설명글이 적힙니다.</p>
                     </div>
                     <div class="btn-area">
-                        <button class="btn-cancel">취소</button>
-                        <button class="btn-confirm">확인</button>
+                        <button class="btn-cancel" @click=${this.closeModal}>취소</button>
+                        <button class="btn-confirm" @click=${this.confirmOrder}>확인</button>
                     </div>
                 </div>
             </div>
             <!-- // 모달 -->
         </div>
+
+        <!-- 옵션 팝업 영역 -->
+        <option-popup 
+            .menu=${this.getMenu()}
+            .menuAmount=${this.getMenuAmount()}
+            .option=${this.getOption()}
+            .orderTypeIndex = ${this.orderTypeIndex}
+            .isPopupOpen=${this.isPopupOpen}
+            .closeOrderPopup=${this.closeOrderPopup.bind(this)}
+            .onIncreaseAmount=${this.onIncreaseOrderAmount.bind(this)}
+            .onDecreaseAmount=${this.onDecreaseOrderAmount.bind(this)}
+            .onAddCartItem=${this.onAddCartItem}
+            .onChangeOption=${this.onChangeOption.bind(this)}
+        >
+        </option-popup>
+        <!-- // 옵션 팝업 영역 -->
+
         `
     }
 }

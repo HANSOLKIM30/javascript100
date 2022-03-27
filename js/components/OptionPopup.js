@@ -1,52 +1,53 @@
 import { html } from "lit";
 import View from "../view";
-import { SpinButton } from "./SpinButton";
 
 import { fetchGetMenuOptions } from "../api"
 import { getMoneyString } from "../utils/currency";
+import { SpinButton } from "./SpinButton";
+import { DEFAULT_OPTION, ORDER_TYPE } from "../constants/constants";
 
-const DEFAULT_OPTION = {
-    id: 1,
-    baseOptions: [],
-    toppingSelectOptions: [],
-    toppingAmountSelectOptions: [],
-}
+
 
 export default class OptionPopup extends View {
-    constructor(
-        menu,
-        menuAmount, 
-        isPopupOpen = false, 
-        closeOrderPopup, 
-        onIncreaseAmount, 
-        onDecreaseAmount,
-        onAddCartItem
-        ) {
+    constructor(menu, menuAmount, option, orderTypeIndex, isPopupOpen = false, closeOrderPopup, onIncreaseAmount, onDecreaseAmount, onAddCartItem, onChangeOption) {
         super();
 
         this.menu = menu;
         this.menuAmount = menuAmount;
+        this.orderTypeIndex = orderTypeIndex;
         this.isPopupOpen = isPopupOpen;
-        this.option = DEFAULT_OPTION;
         this.closeOrderPopup = closeOrderPopup;
         this.onIncreaseAmount = onIncreaseAmount;
-        this.onDecreaseAmount = onDecreaseAmount;
+        this.onDecreaseAmount  = onDecreaseAmount;
         this.onAddCartItem = onAddCartItem;
+        this.onChangeOption = onChangeOption;
 
-        const [menuId] = location.pathname.split('/').splice(-1);
+        this.option = DEFAULT_OPTION;
 
-        fetchGetMenuOptions(menuId).then(response => this.option = response);
+        this.currentPage = location.pathname.split('/')[1];
+        if(this.currentPage === 'detail') {
+            const [menuId] = location.pathname.split('/').splice(-1);
+            fetchGetMenuOptions(menuId).then((response) => {
+                this.option = response
+            });
+        } else if(this.currentPage === 'order') {
+            this.option = option;
+        }
     }
 
     static get properties() {
         return {
             menu: { type: Object },
             menuAmount: { type: Number },
-            option: { type: Object },
+            orderTypeIndex: { type: Number },
+            isPopupOpen: { type: Boolean },
             closeOrderPopup: { type: Function },
             onIncreaseAmount: { type: Function },
             onDecreaseAmount: { type: Function },
             onAddCartItem: { type: Function },
+            onChangeOption: { type: Function },
+            option: { type: Object },
+            currentPage: { type: String },
         }
     }
 
@@ -115,6 +116,10 @@ export default class OptionPopup extends View {
         return price * this.menuAmount;
     }
 
+    onChangeOption() {
+
+    }
+
     render() {
         return html`
             <div class="option-popup-area ${this.isPopupOpen ? '' : 'hidden'}">
@@ -136,13 +141,24 @@ export default class OptionPopup extends View {
                             <div class="menu-detail-area">
                                 <p class="menu-name">
                                     <span class="name">${this.menu.name}</span>
-                                    <span class="badge">${this.menu.orderType}</span>
+                                    <span class="badge">${ORDER_TYPE[this.orderTypeIndex]}</span>
                                 </p>
-                                ${SpinButton({
-                                    count: this.menuAmount,
-                                    onIncrease: this.onIncreaseAmount,
-                                    onDecrease: this.onDecreaseAmount, 
-                                })}
+                                
+                                ${this.currentPage==="detail" ? html `
+                                    ${SpinButton({
+                                        count: this.menuAmount,
+                                        onDecrease: this.onDecreaseAmount, 
+                                        onIncrease: this.onIncreaseAmount,
+                                    })}
+                                ` : ''}
+                                ${this.currentPage==="order" ? html `
+                                    ${SpinButton({
+                                        count: this.menuAmount,
+                                        onDecrease: () => this.onDecreaseAmount(this.menu.id), 
+                                        onIncrease: () => this.onIncreaseAmount(this.menu.id),
+                                    })}
+                                ` : ''}
+
                             </div>
                             <button class="btn-close" @click=${this.closeOrderPopup}>
                                 <img src="../assets/images/ico-close.svg" alt="order popup close button" class="ico-close">
@@ -169,18 +185,28 @@ export default class OptionPopup extends View {
                         >
                         </topping-amount-option-groups>
                     <div class="content-bottom">
-                        <button 
-                            class="btn-order" 
-                            @click=${() => this.onAddCartItem({
-                                menu: this.menu,
-                                amount: this.menuAmount,
-                                option: this.option,
-                                price: this.price
-                            }
-                            )}
-                        >
-                            ${this.menuAmount}개 담기 ${getMoneyString(this.getFinalPrice())}
-                        </button>
+                        ${this.currentPage==="detail" ? html `
+                            <button 
+                                class="btn-order" 
+                                @click=${() => this.onAddCartItem({
+                                    menu: this.menu,
+                                    amount: this.menuAmount,
+                                    option: this.option,
+                                    price: this.getFinalPrice()
+                                }
+                                )}
+                            >
+                                ${this.menuAmount}개 담기 ${getMoneyString(this.getFinalPrice())}
+                            </button>
+                        ` : ''}
+                        ${this.currentPage==="order" ? html `
+                            <button 
+                                class="btn-order" 
+                                @click=${() => this.onChangeOption(this.menu.id, this.option)}
+                            >
+                                옵션 변경하기
+                            </button>
+                        ` : ''}
                     </div>
                 </div>
             </div>

@@ -95,6 +95,7 @@ export default class App extends View {
                     .orderTypeIndex=${this.orderTypeIndex}
                     .cartItems=${this.cartItems}
                     .onDeleteCartItem=${this.onDeleteCartItem.bind(this)}
+                    .onAddcartItem=${this.onAddcartItem.bind(this)}
                 >
                 </order-page>
                 `;

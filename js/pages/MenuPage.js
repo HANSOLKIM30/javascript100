@@ -115,7 +115,7 @@ export default class MenuPage extends View {
                         <!-- 주문분류 -->
                         <tab-list 
                             .orderTypeIndex=${this.orderTypeIndex} 
-                            .onChangeTab=${this.setOrderTypeIndex.bind(this)}
+                            .onChangeTab=${this.onSetOrderTypeIndex.bind(this)}
                         >
                         </tab-list>
                         

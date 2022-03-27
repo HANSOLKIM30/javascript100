@@ -11,7 +11,7 @@ export function SpinButton({ isOption=false, count, onDecrease, onIncrease }) {
                 `
                 :
                 html`
-                <button class="btn-minus" aria-label="빼기" @click=${onDecrease}></button>
+                <button class="btn-minus ${count <= 1 ? 'disabled' : ''}" aria-label="빼기" @click=${onDecrease}></button>
                 <span class="amount">${count}</span>
                 <button class="btn-plus" aria-label="더하기" @click=${onIncrease}></button>
                 `            

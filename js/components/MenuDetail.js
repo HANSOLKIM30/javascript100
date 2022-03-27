@@ -1,8 +1,8 @@
 import { html } from "lit";
 import View from "../view";
 
-import { SpinButton } from "../components/SpinButton";
 import { getMoneyString } from "../utils/currency";
+import { SpinButton } from "./SpinButton";
 
 export default class MenuDetail extends View {
     constructor(menu, orderTypeIndex, menuAmount, onIncreaseAmount, onDecreaseAmount, openOrderPopup) {
@@ -12,7 +12,7 @@ export default class MenuDetail extends View {
         this.orderTypeIndex = orderTypeIndex;
         this.menuAmount = menuAmount;
         this.onIncreaseAmount = onIncreaseAmount;
-        this.onDecreasAmout = onDecreaseAmount;
+        this.onDecreaseAmount = onDecreaseAmount;
         this.openOrderPopup = openOrderPopup;
     }
 
@@ -22,7 +22,7 @@ export default class MenuDetail extends View {
             orderTypeIndex: { type : Number },
             menuAmount: { type : Number },
             onIncreaseAmount: { type : Function },
-            meonDecreaseAmountnu: { type : Function },
+            onDecreaseAmount: { type : Function },
             openOrderPopup: { type: Function },
         }
     }
@@ -81,8 +81,8 @@ export default class MenuDetail extends View {
                             <div class="title">수량</div>
                             ${SpinButton({
                                 count: this.menuAmount,
-                                onIncrease: this.onIncreaseAmount,
                                 onDecrease: this.onDecreaseAmount, 
+                                onIncrease: this.onIncreaseAmount,
                             })}
                         </div>
                         <button class="btn-order" @click=${this.openOrderPopup}>

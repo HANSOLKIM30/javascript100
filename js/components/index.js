@@ -3,6 +3,7 @@ import MenuDetail from "./menuDetail.js";
 import MenuList from "./MenuList.js"
 import MenuPictureList from "./MenuPictureList.js";
 import OptionPopup from "./OptionPopup.js";
+import OrderSelectList from "./OrderSelectList.js";
 import OrderTypeList from "./OrderTypeList.js"
 import RecentMenuList from "./RecentMenuList.js";
 import ReviewList from "./ReviewList.js";
@@ -24,3 +25,4 @@ customElements.define('topping-amount-option-groups', ToppingAmountOptionGroup);
 customElements.define('menu-picture-list', MenuPictureList);
 customElements.define('review-list', ReviewList);
 customElements.define('menu-detail', MenuDetail);
+customElements.define('order-select-list', OrderSelectList);

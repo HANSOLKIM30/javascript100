@@ -1,20 +1,9 @@
 import { html } from "lit";
 import View from "../view";
 import { fetchGetMenu } from "../api";
+import { DEFAULT_MENU } from "../constants/constants";
 
 // REST Api 결과가 없을 것을 대비하여 기본 객체를 상수화.(적극적으로 활용해보기)
-const DEFAULT_MENU = {
-    "id": 1,
-    "name": "음식이름",
-    "reviewPoint": 0.0,
-    "description": "불러오는 중",
-    "price": 0,
-    "orderCount": 0,
-    "imageUrl": "https://ldb-phinf.pstatic.net/20200416_252/1587007251652svUkx_PNG/%C4%A5%B8%AE%BA%A3%C0%CC%C4%C1_%BF%FA%BA%BC.png?type=f220_220_60_sharpen",
-    "pictures": [],
-    "reviews": []
-};
-
 export default class DeatilPage extends View {
     constructor(orderTypeIndex, onSetOrderTypeIndex, onAddCartItem) {
         super();
@@ -43,14 +32,6 @@ export default class DeatilPage extends View {
             onAddCartItem: { type: Function },
         }
     }
-   
-    openOrderPopup() {
-        this.isPopupOpen = true;
-    }
-
-    closeOrderPopup() {
-        this.isPopupOpen = false;
-    }
 
     onIncreaseAmount() {
         this.menuAmount = this.menuAmount + 1;
@@ -63,8 +44,12 @@ export default class DeatilPage extends View {
         this.menuAmount = this.menuAmount - 1;
     }
 
-    getFinalPrice() {
+    openOrderPopup() {
+        this.isPopupOpen = true;
+    }
 
+    closeOrderPopup() {
+        this.isPopupOpen = false;
     }
 
     render() {
@@ -115,10 +100,11 @@ export default class DeatilPage extends View {
         <option-popup 
             .menu=${this.menu} 
             .menuAmount=${this.menuAmount}
-            .isPopupOpen=${this.isPopupOpen} 
+            .orderTypeIndex = ${this.orderTypeIndex}
+            .isPopupOpen=${this.isPopupOpen}
             .closeOrderPopup=${this.closeOrderPopup.bind(this)}
-            .onIncreaseAmount=${this.onIncreaseAmount.bind(this)}
-            .onDecreaseAmount=${this.onDecreaseAmount.bind(this)}
+            .onIncreaseAmount=${this.onIncreaseOrderAmount}
+            .onDecreaseAmount=${this.onDecreaseOrderAmount}            
             .onAddCartItem=${this.onAddCartItem}
         >
         </option-popup>
