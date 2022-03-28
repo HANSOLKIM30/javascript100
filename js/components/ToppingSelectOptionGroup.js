@@ -30,8 +30,8 @@ export default class extends View {
             <ul class="option-list">
                 ${this.items.map((item) => html `
                     <li class="option-item">
-                        <input type="checkbox" id="${item.name}" class="input-check" .checked=${item.isSelected}>
-                        <label for="${item.name}" class="label" @click=${() => this.toggleToppingSelectOption(item.name)}>
+                        <input type="checkbox" id="${item.name}" class="input-check" .checked=${item.isSelected} @click=${() => this.toggleToppingSelectOption(item.name)}>
+                        <label for="${item.name}" class="label">
                             <span class="label-txt">${item.name} <span class="price">+${getMoneyString(item.price)}원</span></span>
                             <span class="label-icon"></span>
                         </label>

@@ -27,8 +27,8 @@ export default class extends View {
             <ul class="option-list">
                 ${this.items.map(item => html `
                     <li class="option-item">
-                        <input type="radio" id="${item.name}" class="input-radio" name="base" .checked=${item.isSelected}>
-                        <label for="${item.name}" class="label" @click=${() => this.toggleBaseOption(item.name)}>
+                        <input type="radio" id="${item.name}" class="input-radio" name="base" .checked=${item.isSelected} @click=${() => this.toggleBaseOption(item.name)}>
+                        <label for="${item.name}" class="label">
                             <span class="label-txt">${item.name}</span>
                             <span class="label-icon"></span>
                         </label>
