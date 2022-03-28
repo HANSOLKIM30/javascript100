@@ -2019,6 +2019,7 @@ body.scroll-off {
   color: #666;
   letter-spacing: -0.3px;
   text-align: center;
+  margin-left: 1px;
 }
 
 .tab-switch-box .tab-switch.is-active {
@@ -2289,7 +2290,11 @@ body.scroll-off {
   background-color: #fff;
 }
 
-.menu-list-area:not(.new):not(.popular) {
+.menu-list-area:first-child {
+  padding: 10px 18px;
+}
+
+.menu-list-area:not(.new):not(.popular):not(:first-child) {
   margin-top: 10px;
 }
 
@@ -2325,6 +2330,7 @@ body.scroll-off {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding-top: 10px;
 }
 
 .menu-list-area .title-area {
@@ -2451,6 +2457,62 @@ body.scroll-off {
   font-weight: 700;
   text-align: center;
   color: #fff;
+}
+
+.order-list-filter {
+  background-color: #fff;
+  padding: 20px 18px 0;
+}
+
+.order-list-filter .checkbox-sold-out {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  color: #666;
+}
+
+.order-list-filter .checkbox-sold-out .label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.order-list-filter .checkbox-sold-out .label .label-icon {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  margin-right: 6px;
+  padding: 4px;
+  border-radius: 50%;
+  background-color: #c9c9c9;
+}
+
+.order-list-filter .checkbox-sold-out .label .label-icon.checked {
+  background-color: #00D780;
+}
+
+.order-list-filter .checkbox-sold-out .label .label-icon::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 6px;
+  width: 15px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-width: 0 0 2px 2px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
 }
 
 .dimmed-layer {

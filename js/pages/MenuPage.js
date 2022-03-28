@@ -133,6 +133,7 @@ export default class MenuPage extends View {
                             지금은 주문을 받을 수 없습니다.
                         </div>
                         <!-- // 주문분류 -->
+
                         <!-- 최근 주문 내역 -->
                         <recent-menu-list .recentMenuItems=${this.recentMenuItems} .redirectDetailPage=${this.redirectDetailPage} .cartItems=${this.cartItems}></recent-menu-list>
                         <!-- // 최근 주문 내역 -->
@@ -155,6 +156,18 @@ export default class MenuPage extends View {
                 </div>
             </div>
             <!-- // 메뉴 카테고리 영역 -->
+
+            <!-- 품절 상품 제외 -->
+            <div class="order-list-filter">
+                <div class="checkbox-sold-out">
+                    <input type="checkbox" id="sold_out" class="input-check">
+                    <label class="label" for="sold_out">
+                        <span class="label-icon"></span>
+                        <span class="label-text">품절 상품 제외</span>
+                    </label>
+                </div>                     
+            </div>
+            <!-- //품절 상품 제외 -->
 
             <!-- 메뉴 리스트 영역 -->
             ${this.menuGroups.map((menuGroup) => 
