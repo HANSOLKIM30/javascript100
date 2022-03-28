@@ -152,15 +152,17 @@ export default class OrderPage extends View {
         this.contactText = value;
     }
 
-    onChangeOption(menuId, option) {
+    onChangeOption(menuId, amount, option, price) {
         const newCartItems = [...this.cartItems];
         const target = newCartItems.find((item) => menuId === item.menu.id);
 
+        target.amount = amount;
         target.option = option;
+        target.price = price;
 
         this.cartItems = newCartItems;
 
-        this.isPopupOpen=false;
+        this.closeOrderPopup();
     }
 
     render() {

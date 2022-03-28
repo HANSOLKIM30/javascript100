@@ -117,10 +117,6 @@ export default class OptionPopup extends View {
         return price * this.menuAmount;
     }
 
-    onChangeOption() {
-
-    }
-
     render() {
         return html`
             <div class="option-popup-area ${this.isPopupOpen ? '' : 'hidden'}">
@@ -203,7 +199,7 @@ export default class OptionPopup extends View {
                         ${this.currentPage==="order" ? html `
                             <button 
                                 class="btn-order" 
-                                @click=${() => this.onChangeOption(this.menu.id, this.option)}
+                                @click=${() => this.onChangeOption(this.menu.id, this.menuAmount, this.option, this.getFinalPrice())}
                             >
                                 옵션 변경하기
                             </button>
