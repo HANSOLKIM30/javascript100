@@ -69,6 +69,7 @@ export default class OptionPopup extends View {
         // 현재 targetOption의 isSelected의 반대되는 값을 할당
         targetOption.isSelected = !targetOption.isSelected;
 
+        console.log(targetOption.is)
         this.option = newOption;
     }
 
@@ -103,7 +104,7 @@ export default class OptionPopup extends View {
         let price = this.menu.price;
 
         this.option.toppingSelectOptions.forEach((option => {
-            if(option.isSelelcted) {
+            if(option.isSelected) {
                 price += option.price;
             }
         }));

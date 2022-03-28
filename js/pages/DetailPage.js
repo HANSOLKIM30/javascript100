@@ -103,8 +103,8 @@ export default class DeatilPage extends View {
             .orderTypeIndex = ${this.orderTypeIndex}
             .isPopupOpen=${this.isPopupOpen}
             .closeOrderPopup=${this.closeOrderPopup.bind(this)}
-            .onIncreaseAmount=${this.onIncreaseOrderAmount}
-            .onDecreaseAmount=${this.onDecreaseOrderAmount}            
+            .onIncreaseAmount=${this.onIncreaseAmount}
+            .onDecreaseAmount=${this.onDecreaseAmount}            
             .onAddCartItem=${this.onAddCartItem}
         >
         </option-popup>
