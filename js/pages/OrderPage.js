@@ -1,13 +1,12 @@
 import { html } from "lit";
 
-import { ORDER_TYPE_HEADING, ORDER_TYPE_MESSAGE} from "../constants/constants";
+import { DEFAULT_MENU, DEFAULT_OPTION, ORDER_TYPE_HEADING, ORDER_TYPE_MESSAGE} from "../constants/constants";
 import { getMoneyString } from "../utils/currency";
 import View from "../view";
 
 const ACCORDION_ITEMS = [{
         title: "개인정보 수집 동의",
         content: `(1) 고객의 개인정보는 회원탈퇴 등 수집 및 이용목적이 달성되거나 동의철회 요청이 있는 경우 지체없이 파기됩니다. 단,「전자상거래 등에서의 소비자보호에 관한 법률」 등 관련법령의 규정에 의하여 다음과 같이 거래 관련 권리 의무 관계의 확인 등을 이유로 일정기간 보유하여야 할 필요가 있을 경우에는 그 기간동안 보유합니다. 가. 「전자상거래 등에서의 소비자보호에 관한 법률」 제6조 - 계약 또는 청약 철회 등에 관한 기록 : 5년 - 대금결재 및 재화 등의 공급에 관한 기록 : 5년 - 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년 나. 「통신비밀보호법」 제15조의2 - 방문(로그)에 관한 기록: 1년 다. 기타 관련 법령 등 
-      
     (2) 회사의 개인정보 파기방법은 다음과 같습니다. 가. 파기 절차 ① 회원가입 등을 위해 입력한 정보는 목적이 달성된 후 별도의 DB로 옮겨져(종이의 경우 별도의 서류함 내부 방침 및 기타 관련 법령에 의한 일정기간 저장된 후 파기됩니다. ② 동 개인정보는 법률에 의한 경우가 아니고서는 보유되는 이외의 다른 목적으로 이용되지 않습니다. 나. 파기 방법 ① 종이에 출력된 개인정보는 분쇄기로 분쇄하거나 소각을 통하여 파기합니다. ② 전자적 파일 형태로 저장된 개인정보는 기록을 재생할 수 없는 기술적 방법을 사용하여 삭제합니다. 
         
     (3) 회사는 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 제29조 제2항에 따라 휴면회원(최근 12개월 동안 서비스를 이용하지 아니한 회원)에 대해 회원자격 상실에 대한 안내문을 통지하고, 안내문에서 정한 기한 내에 답변이 없을 경우 회원자격을 상실시킬 수 있습니다. 이 경우, 휴면회원의 개인정보는 다른 회원의 개인정보와 분리하여 별도로 저장·관리 되며, 분리 저장된 개인정보는 법정보관기간 경과 후 파기하고 있습니다. 파기되지 않은 개인 정보 중 해당 이용자의 요청이 있는 경우 고객 정보는 서비스 이용을 재개하는 시점에 다시 제공됩니다.`,
@@ -45,7 +44,12 @@ export default class OrderPage extends View {
         this.needDisposable = true;
 
         this.isPopupOpen = false;
-        this.item = {};
+        this.item = {
+            menu: DEFAULT_MENU,
+            amount: 0,
+            price: 0,
+            option: DEFAULT_OPTION
+        };
     }
 
     static get properties() {
@@ -165,11 +169,22 @@ export default class OrderPage extends View {
         this.closeOrderPopup();
     }
 
+    closeModal() {
+        this.isModalOpen = false;
+    }
+
+    openModal() {
+        this.isModalOpen = true;
+    }
+
+    confirmOrder() {
+
+    }
+
     render() {
         const cartItemsTotalPrice = this.cartItems.reduce(
             (acc, item) => acc + item.price, 0
         );
-
         return html `
         <div class="container order">
             <div class="order-form-area">
@@ -250,7 +265,7 @@ export default class OrderPage extends View {
                                                 class="input-radio" 
                                                 name="disposables" 
                                                 .checked=${this.needDisposable} 
-                                                @click=${this.setNeedDisposable(true)}
+                                                @click=${() => this.setNeedDisposable(true)}
                                             >
                                             <label for="need" class="input-radio-button need">필요해요</label>
                                         </div>
@@ -261,7 +276,7 @@ export default class OrderPage extends View {
                                                 class="input-radio" 
                                                 name="disposables" 
                                                 .checked=${!this.needDisposable} 
-                                                @click=${this.setNeedDisposable(false)}
+                                                @click=${() => this.setNeedDisposable(false)}
                                             >
                                             <label for="no-need" class="input-radio-button no-need">필요 없어요</label>
                                         </div>
@@ -302,59 +317,12 @@ export default class OrderPage extends View {
                                     <p class="place-address">서울시 강남구 역삼동 123-4</p>
                                     <p class="place-address-detail">역삼역 8번 출구로 나와서 직진 410m</p>
                                 </div>
-                                <img src="https://via.placeholder.com/400x170?text=map image" alt="지도" class="img-map">
+                                <img src="/assets/images/map.png" alt="지도" class="img-map">
                             </div>
                         </div>
                         <div class="agreement-area">
                             <p class="title">개인정보 수집, 제공</p>
-                            <ul class="agreement-list">
-                                <li class="agreement-item is-open">
-                                    <div class="agreement-title">
-                                        <span class="txt">개인정보 수집 동의</span>
-                                        <button class="btn-toggle">
-                                            <img src="../assets/images/ico-arrow-gray.svg" alt="아래화살표">
-                                        </button>
-                                    </div>
-                                    <div class="agreement-content">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae saepe doloremque
-                                        omnis! Natus quis corrupti repudiandae quidem nisi facilis ex ea mollitia saepe.
-                                        Magnam saepe neque commodi repellat eos iusto!<br><br>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae saepe doloremque
-                                        omnis! Natus quis corrupti repudiandae quidem nisi facilis ex ea mollitia saepe.
-                                        Magnam saepe neque commodi repellat eos iusto!<br><br>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae saepe doloremque
-                                        omnis! Natus quis corrupti repudiandae quidem nisi facilis ex ea mollitia saepe.
-                                        Magnam saepe neque commodi repellat eos iusto!<br><br>
-                                    </div>
-                                </li>
-                                <li class="agreement-item">
-                                    <div class="agreement-title">
-                                        <span class="txt">개인정보 제공 동의</span>
-                                        <button class="btn-toggle">
-                                            <img src="../assets/images/ico-arrow-gray.svg" alt="아래화살표">
-                                        </button>
-                                    </div>
-                                    <div class="agreement-content">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae saepe doloremque
-                                        omnis! Natus quis corrupti repudiandae quidem nisi facilis ex ea mollitia saepe.
-                                        Magnam saepe neque commodi repellat eos iusto!<br><br>
-                                    </div>
-                                </li>
-                                <li class="agreement-item">
-                                    <div class="agreement-title color-point">
-                                        <span class="txt">주문 취소및 환불 문의사항</span>
-                                        <button class="btn-toggle">
-                                            <img src="../assets/images/ico-arrow-gray.svg" alt="아래화살표">
-                                        </button>
-                                    </div>
-                                    <div class="agreement-content">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae saepe doloremque
-                                        omnis! Natus quis corrupti repudiandae quidem nisi facilis ex ea mollitia saepe.
-                                        Magnam saepe neque commodi repellat eos iusto!<br><br>
-                                    </div>
-                                </li>
-                            </ul>
-
+                            <accordion-list .items=${ACCORDION_ITEMS}></accordion-list>
                             <p class="agreement-info-txt">주문 서비스 이용을 위한 개인정보 수집 및 제3자 제공, 취소/환불 규정을 확인하였으며 이에 동의합니다.</p>
                         </div>
                     </div>
@@ -363,7 +331,7 @@ export default class OrderPage extends View {
 
                 <!-- 주문하기 버튼 -->
                 <div class="btn-order-area">
-                    <button class="btn-order">
+                    <button class="btn-order" @click=${this.openModal}>
                         <svg viewBox="0 0 18 18" class="ico-n-logo">
                             <path fill-rule="evenodd" fill="currentColor" d="M18 0v18H0V0h18zM7.255 4.582H4.473v9.054h2.915V8.79l3.357 4.846h2.782V4.582h-2.915v4.846L7.255 4.582z">
                             </path>
@@ -382,7 +350,7 @@ export default class OrderPage extends View {
             </div>
 
             <!-- 모달 -->
-            <div class="modal-wrapper hidden">
+            <div class="modal-wrapper ${this.isModalOpen ? "" : "hidden"}">
                 <div class="dimmed-layer light"></div>
                 <div class="modal-container">
                     <div class="modal-content">

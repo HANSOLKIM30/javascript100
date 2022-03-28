@@ -4,12 +4,10 @@ import View from "../view";
 import { fetchGetMenuOptions } from "../api"
 import { getMoneyString } from "../utils/currency";
 import { SpinButton } from "./SpinButton";
-import { DEFAULT_OPTION, ORDER_TYPE } from "../constants/constants";
-
-
+import { DEFAULT_MENU, DEFAULT_OPTION, ORDER_TYPE } from "../constants/constants";
 
 export default class OptionPopup extends View {
-    constructor(menu, menuAmount, option, orderTypeIndex, isPopupOpen = false, closeOrderPopup, onIncreaseAmount, onDecreaseAmount, onAddCartItem, onChangeOption) {
+    constructor(menu=DEFAULT_MENU, menuAmount, option, orderTypeIndex, isPopupOpen = false, closeOrderPopup, onIncreaseAmount, onDecreaseAmount, onAddCartItem, onChangeOption) {
         super();
 
         this.menu = menu;

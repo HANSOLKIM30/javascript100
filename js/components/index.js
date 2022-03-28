@@ -1,3 +1,4 @@
+import AccordionList from "./AccordionList.js";
 import Header from "./Header.js";
 import MenuDetail from "./menuDetail.js";
 import MenuList from "./MenuList.js"
@@ -26,3 +27,4 @@ customElements.define('menu-picture-list', MenuPictureList);
 customElements.define('review-list', ReviewList);
 customElements.define('menu-detail', MenuDetail);
 customElements.define('order-select-list', OrderSelectList);
+customElements.define('accordion-list', AccordionList);
