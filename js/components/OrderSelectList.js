@@ -53,7 +53,7 @@ export default class OrderSelectList extends View {
                                     onDecrease: () => this.onDecreaseOrderAmount(item.menu.id),
                                     onIncrease: () => this.onIncreaseOrderAmount(item.menu.id)
                                 })}
-                                <p class="menu-price">${getMoneyString(item.menu.price)}원</p>
+                                <p class="menu-price">${getMoneyString(item.price)}원</p>
                             </div>
                         </div>
                         <button class="btn-delete" @click=${() => this.onDeleteCartItem(item.menu.id)}>

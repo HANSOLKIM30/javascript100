@@ -153,7 +153,7 @@ export default class OrderPage extends View {
 
     render() {
         const cartItemsTotalPrice = this.cartItems.reduce(
-            (acc, item) => acc + item.menu.price * item.amount, 0
+            (acc, item) => acc + item.price, 0
         );
 
         return html `
