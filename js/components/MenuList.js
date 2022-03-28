@@ -3,10 +3,11 @@ import { getMoneyString } from '../utils/currency.js';
 import View from '../view.js';
 
 export default class MenuList extends View {
-    constructor(menuGroup, redirectDetailPage, cartItems=[]) {
+    constructor(menuGroup, index, redirectDetailPage, cartItems=[]) {
         super();
         
         this.menuGroup = menuGroup;
+        this.index = index;
         this.redirectDetailPage = redirectDetailPage;
         this.cartItems = cartItems;
 
@@ -16,6 +17,7 @@ export default class MenuList extends View {
     static get properties() {
         return {
             menuGroup: { type: Object },
+            index: { type: Number },
             redirectDetailPage: { type: Function },
             isClosed: { type: Boolean },
         };
@@ -39,7 +41,7 @@ export default class MenuList extends View {
             <!-- 카테고리 클릭 시, 이동 ==> 임의의 사용자 데이터를 담을 수 있는 data-attribute 생성하기 -->
             <div 
             data-scroll-id=${this.menuGroup.category}
-            class="menu-list-area ${this.isClosed ? 'is-closed' : ''}">
+            class="menu-list-area ${this.isClosed ? 'is-closed' : ''} ${this.index===0 ? 'no-border-top' : ''}">
                 <div class="common-inner">
                     <div class="menu-category">
                         <p class="title">${this.menuGroup.categoryName}</p>

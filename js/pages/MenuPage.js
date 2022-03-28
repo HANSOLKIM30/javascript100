@@ -170,8 +170,8 @@ export default class MenuPage extends View {
             <!-- //품절 상품 제외 -->
 
             <!-- 메뉴 리스트 영역 -->
-            ${this.menuGroups.map((menuGroup) => 
-                html `<menu-list .menuGroup=${menuGroup} .redirectDetailPage=${this.redirectDetailPage} .cartItems=${this.cartItems}></menu-list>`
+            ${this.menuGroups.map((menuGroup, index) => 
+                html `<menu-list .menuGroup=${menuGroup} .index=${index} .redirectDetailPage=${this.redirectDetailPage} .cartItems=${this.cartItems}></menu-list>`
             )}
             <!-- // 메뉴 리스트 영역 -->
 

@@ -2286,20 +2286,13 @@ body.scroll-off {
 }
 
 .menu-list-area {
-  padding: 28px 18px 10px;
   background-color: #fff;
-}
-
-.menu-list-area:first-child {
   padding: 10px 18px;
+  border-top: 1px solid #f2f2f2;
 }
 
-.menu-list-area:not(.new):not(.popular):not(:first-child) {
-  margin-top: 10px;
-}
-
-.menu-list-area.new {
-  border-bottom: 1px solid #f2f2f2;
+.menu-list-area.no-border-top {
+  border-top: none;
 }
 
 .menu-list-area.is-closed {
