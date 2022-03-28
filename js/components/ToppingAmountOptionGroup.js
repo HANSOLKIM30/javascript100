@@ -8,7 +8,6 @@ export default class extends View {
     constructor(items, onIncreaseOptionAmount, onDecreaseOptionAmount) {
         super();
 
-        //this.isOption = true;
         this.items = items;
         this.onIncreaseOptionAmount = onIncreaseOptionAmount;
         this.onIncreaseOptionAmount = onDecreaseOptionAmount;
@@ -16,7 +15,6 @@ export default class extends View {
 
     static get properties() {
         return {
-            //isOption: { type: Boolean },
             items: { type: Array },
             onIncreaseOptionAmount: { type: Function },
             onIncreaseOptionAmount: { type: Function },

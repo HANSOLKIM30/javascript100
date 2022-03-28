@@ -53,9 +53,10 @@ export default class OptionPopup extends View {
 
     toggleBaseOption(optionName) {
         const newOption = { ...this.option };
+
         const targetOption = newOption.baseOptions.find((element) => element.name === optionName);
 
-        targetOption.isSelelcted = !targetOption.isSelelcted;
+        targetOption.isSelected = !targetOption.isSelected;
 
         this.option = newOption;
     }
@@ -66,7 +67,7 @@ export default class OptionPopup extends View {
         const targetOption = newOption.toppingSelectOptions.find((element) => element.name === optionName);
 
         // 현재 targetOption의 isSelected의 반대되는 값을 할당
-        targetOption.isSelelcted = !targetOption.isSelelcted;
+        targetOption.isSelected = !targetOption.isSelected;
 
         this.option = newOption;
     }
