@@ -3,7 +3,7 @@ import { getMoneyString } from '../utils/currency.js';
 import View from '../view.js';
 
 export default class MenuList extends View {
-    constructor(menuGroup, index, redirectDetailPage, cartItems=[]) {
+    constructor(menuGroup, index, redirectDetailPage, cartItems=[], removeSoldOut) {
         super();
         
         this.menuGroup = menuGroup;
@@ -12,6 +12,7 @@ export default class MenuList extends View {
         this.cartItems = cartItems;
 
         this.isClosed = false;
+        this.removeSoldOut = removeSoldOut;
     }
     
     static get properties() {
@@ -20,6 +21,7 @@ export default class MenuList extends View {
             index: { type: Number },
             redirectDetailPage: { type: Function },
             isClosed: { type: Boolean },
+            removeSoldOut: { type: Boolean },
         };
     }
 
@@ -51,7 +53,7 @@ export default class MenuList extends View {
                    </div>
                     <ul class="menu-list">
                         ${this.menuGroup.items.map((item) => (html `
-                            <li class="menu-item" @click=${ item.soldOut ? null : () => this.redirectDetailPage(item.id)}>
+                            <li class="menu-item ${this.removeSoldOut && item.soldOut ? 'hidden' : ''}" @click=${ item.soldOut ? null : () => this.redirectDetailPage(item.id)}>
                                 <a class="menu-detail">
                                     <div class="menu-img-area">
                                         <!-- 이미지 최적화를 위해 가로, 세로를 html 내부에 적어주는 것이 좋다. -->

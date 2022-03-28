@@ -1,10 +1,11 @@
 .menu-list-area {
     background-color: #fff;
-    padding: 10px $m-padding;
-    border-top: 1px solid #f2f2f2;
+    padding: 0 $m-padding;
 
     &.no-border-top {
-        border-top: none;
+        .menu-category {
+            border-top: none;
+        }
     }
 
     &.is-closed {
@@ -29,7 +30,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-top: 10px;
+        padding-top: 20px;
+        border-top: 1px solid #f2f2f2;
     }
 
     .title-area {

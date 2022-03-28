@@ -18,6 +18,8 @@ export default class MenuPage extends View {
         this.menuGroups = [];
         this.selectedCategory = 'recommends';
         
+        this.isChecked = true;
+        
         fetchGetRecentOrders().then(
             (response) => (this.recentMenuItems = response),
         );
@@ -76,6 +78,17 @@ export default class MenuPage extends View {
         return this.cartItems.reduce((totalAmount, cartItem) => {
             return totalAmount + cartItem.amount;
         }, 0);
+    }
+
+    toggleIsChecked() {
+        this.isChecked = !this.isChecked;
+
+        // 품절 상품 제외 버튼이 false일 때, class hidden 제거
+        const menu_item = document.querySelectorAll('.menu-item.hidden');
+
+        if(!this.isChecked) {
+            menu_item.forEach((item) => item.classList.remove('hidden'));
+        }
     }
 
     render() {
@@ -159,19 +172,21 @@ export default class MenuPage extends View {
 
             <!-- 품절 상품 제외 -->
             <div class="order-list-filter">
-                <div class="checkbox-sold-out">
-                    <input type="checkbox" id="sold_out" class="input-check">
-                    <label class="label" for="sold_out">
-                        <span class="label-icon"></span>
-                        <span class="label-text">품절 상품 제외</span>
-                    </label>
-                </div>                     
+                <div class="common-inner">
+                    <div class="checkbox-sold-out">
+                        <input type="checkbox" id="sold_out" class="input-check" .checked=${this.isChecked} @click=${this.toggleIsChecked}>
+                        <label class="label" for="sold_out">
+                            <span class="label-icon"></span>
+                            <span class="label-text">품절 상품 제외</span>
+                        </label>
+                    </div>                     
+                </div>
             </div>
             <!-- //품절 상품 제외 -->
 
             <!-- 메뉴 리스트 영역 -->
             ${this.menuGroups.map((menuGroup, index) => 
-                html `<menu-list .menuGroup=${menuGroup} .index=${index} .redirectDetailPage=${this.redirectDetailPage} .cartItems=${this.cartItems}></menu-list>`
+                html `<menu-list .menuGroup=${menuGroup} .index=${index} .removeSoldOut=${this.isChecked} .redirectDetailPage=${this.redirectDetailPage} .cartItems=${this.cartItems}></menu-list>`
             )}
             <!-- // 메뉴 리스트 영역 -->
 

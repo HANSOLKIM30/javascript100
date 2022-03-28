@@ -7,6 +7,14 @@
         justify-content: flex-end;
         color: $booking-color-text4;
 
+        .input-check:checked {
+            & + .label {
+                .label-icon {
+                    background-color: #00D780;
+                }
+            }
+        }
+
         .label {
             display: flex;
             align-items: center;
@@ -21,10 +29,6 @@
                 padding: 4px;
                 border-radius: 50%;
                 background-color: #c9c9c9;
-
-                &.checked {
-                    background-color: #00D780;
-                }
 
                 &::before {
                     content: '';
