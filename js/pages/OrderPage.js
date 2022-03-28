@@ -29,17 +29,16 @@ const ACCORDION_ITEMS = [{
 ];
 
 export default class OrderPage extends View {
-    constructor(orderTypeIndex, cartItems = [], onDeleteCartItem, onResetCartItems, onAddcartItem) {
+    constructor(orderTypeIndex, cartItems = [], onDeleteCartItem, onAddcartItem, onResetCartItems) {
         super();
 
         this.orderTypeIndex = orderTypeIndex
         this.cartItems = cartItems;
         this.onDeleteCartItem = onDeleteCartItem;
-        this.onResetCartItems = onResetCartItems;
         this.onAddcartItem = onAddcartItem;
+        this.onResetCartItems = onResetCartItems;
 
         this.requestText = '';
-        this.contactText = '';
         this.isModalOpen = false;
         this.needDisposable = true;
 
@@ -57,10 +56,9 @@ export default class OrderPage extends View {
             orderTypeIndex: { type: Number },
             cartItems: { type: Array},
             onDeleteCartItem: { type: Function },
-            onResetCartItems: { type: Function },
             onAddcartItem: { type: Function },
+            onResetCartItems: { type: Function },
             requestText: { type: String },
-            contactText: { type: String },
             isModalOpen: { type: Boolean },
             needDisposable: { type: Boolean },
 
@@ -149,13 +147,6 @@ export default class OrderPage extends View {
         this.requestText = value;
     }
 
-    handleContactTextChange(event) {
-        const {
-            value
-        } = event.target;
-        this.contactText = value;
-    }
-
     onChangeOption(menuId, amount, option, price) {
         const newCartItems = [...this.cartItems];
         const target = newCartItems.find((item) => menuId === item.menu.id);
@@ -178,7 +169,8 @@ export default class OrderPage extends View {
     }
 
     confirmOrder() {
-
+        this.onResetCartItems();
+        this.redirectMenuListPage();
     }
 
     render() {
@@ -250,6 +242,7 @@ export default class OrderPage extends View {
                 <!-- // 주문서 메뉴 -->
 
                 <!-- 주문자 정보 -->
+                <form>
                 <div class="order-content-extra">
                     <div class="common-inner">
                         <div class="orderer-info-area">
@@ -294,19 +287,6 @@ export default class OrderPage extends View {
                                         @change=${this.handleRequestTextChange}
                                     >
                                 </li>
-
-                                <li class="info-item">
-                                    <p class="info-title">주문자 연락처 <span class="fw700 color-point">(필수)</span></p>
-                                    <input 
-                                        type="text" 
-                                        name="contactText"
-                                        placeholder="연락처를 입력해 주세요." 
-                                        class="input-text" 
-                                        required 
-                                        value=${this.contactText} 
-                                        @change=${this.handleContactTextChange}
-                                    >
-                                </li>
                             </ul>
                         </div>
                         <div class="place-map-area">
@@ -340,7 +320,7 @@ export default class OrderPage extends View {
                     </button>
                 </div>
                 <!-- // 주문하기 버튼 -->
-
+                </form>
                 <!-- 맨 위로 -->
                 <div class="go-to-top">
                     <a href="#" class="link">Top <i class="ico-up"></i></a>
@@ -354,7 +334,7 @@ export default class OrderPage extends View {
                 <div class="dimmed-layer light"></div>
                 <div class="modal-container">
                     <div class="modal-content">
-                        <button class="btn-close">
+                        <button class="btn-close" @click=${this.closeModal}>
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L14 14" stroke="#999" stroke-width="1.5"/>
                                 <path d="M2 14L14 2" stroke="#999" stroke-width="1.5"/>
@@ -367,8 +347,8 @@ export default class OrderPage extends View {
                                 d="M29.9,20.5C29.7,20.2,29.3,20,29,20h-1.1c-0.5-4.4-4.1-8.8-8.7-10.2c-2.1-0.7-4.4-0.7-6.5,0C8.2,11.2,4.5,15.6,4.1,20H3   c-0.3,0-0.7,0.2-0.9,0.5s-0.2,0.7,0,1C3.5,24.3,6.3,26,9.5,26h13.1c3.1,0,6-1.7,7.4-4.6C30,21.1,30,20.8,29.9,20.5z M13.3,11.7   c1.7-0.5,3.6-0.5,5.3,0c3.7,1.1,6.8,4.7,7.3,8.3H6.1C6.6,16.4,9.6,12.9,13.3,11.7z M22.5,24H9.5c-1.8,0-3.4-0.7-4.6-2h22.2   C25.9,23.3,24.3,24,22.5,24z" />
                             </svg>
                         </div>
-                        <h1 class="modal-title">모달 제목</h1>
-                        <p class="modal-desc">모달에 관련된 설명글이 적힙니다.</p>
+                        <h1 class="modal-title">주문 완료</h1>
+                        <p class="modal-desc">주문이 완료되었습니다.</p>
                     </div>
                     <div class="btn-area">
                         <button class="btn-cancel" @click=${this.closeModal}>취소</button>

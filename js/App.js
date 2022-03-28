@@ -62,6 +62,10 @@ export default class App extends View {
         dispatchEvent(new PopStateEvent('popstate'));
     }
 
+    onResetCartItems() {
+        this.cartItems = [];
+    }
+
     onDeleteCartItem(menuId) {
 
         const newCartItems = [ ...this.cartItems ];
@@ -96,6 +100,7 @@ export default class App extends View {
                     .cartItems=${this.cartItems}
                     .onDeleteCartItem=${this.onDeleteCartItem.bind(this)}
                     .onAddcartItem=${this.onAddcartItem.bind(this)}
+                    .onResetCartItems=${this.onResetCartItems.bind(this)}
                 >
                 </order-page>
                 `;
