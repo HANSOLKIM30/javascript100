@@ -85,7 +85,15 @@ export default class OrderPage extends View {
         if (target.amount <= 1) {
             return;
         }
+
+        // 카트 item의 수량을 변경 시, totalAmount price를 다시 계산하기 위해 하나 당 가격 계산
+        const singleItemPrice = target.price / target.amount;
+        
+        // target의 수량 -1 줄이기
         target.amount -= 1;
+
+        // totalAmount price에서 singeItemPrice만큼의 가격을 빼기
+        target.price -= singleItemPrice;
 
         this.cartItems = newCartItems;
     }
@@ -94,7 +102,11 @@ export default class OrderPage extends View {
         const newCartItems = [...this.cartItems];
         const target = newCartItems.find((item) => menuId === item.menu.id);
 
+        const singleItemPrice = target.price / target.amount;
+
         target.amount += 1;
+
+        target.price += singleItemPrice;
 
         this.cartItems = newCartItems;
     }
