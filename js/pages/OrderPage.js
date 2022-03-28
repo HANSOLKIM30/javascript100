@@ -242,7 +242,6 @@ export default class OrderPage extends View {
                 <!-- // 주문서 메뉴 -->
 
                 <!-- 주문자 정보 -->
-                <form>
                 <div class="order-content-extra">
                     <div class="common-inner">
                         <div class="orderer-info-area">
@@ -320,7 +319,6 @@ export default class OrderPage extends View {
                     </button>
                 </div>
                 <!-- // 주문하기 버튼 -->
-                </form>
                 <!-- 맨 위로 -->
                 <div class="go-to-top">
                     <a href="#" class="link">Top <i class="ico-up"></i></a>
