@@ -71,7 +71,7 @@ export default class OptionPopup extends View {
     }
 
     increaseOptionAmount(optionName) {
-        // 전개연산자 ...를 통한 깊은 복사(원본 option과 그 하위 속성의 값을 바꾸지 않게 하기 위함.)
+        // 전개연산자 ...를 통한 얉은 복사(내부에 객체가 있는 경우, 원본값 참조)
         const newOption = { ...this.option };
 
         // find() 메서드는 주어진 판별 함수를 만족하는 첫 번째 요소의 값을 반환한다.
